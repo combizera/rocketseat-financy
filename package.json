@@ -1,0 +1,39 @@
+{
+  "name": "financy",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "dotenv": "^17.2.2",
+      "zod": "^4.1.13",
+      "typescript": "^5",
+      "@prisma/client": "^7.1.0"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter '*' build",
+    "check-types": "bun run --filter '*' check-types",
+    "dev:native": "bun run --filter native dev",
+    "dev:web": "bun run --filter web dev",
+    "dev:server": "bun run --filter server dev",
+    "db:push": "bun run --filter @financy/db db:push",
+    "db:studio": "bun run --filter @financy/db db:studio",
+    "db:generate": "bun run --filter @financy/db db:generate",
+    "db:migrate": "bun run --filter @financy/db db:migrate",
+    "db:local": "bun run --filter @financy/db db:local"
+  },
+  "packageManager": "bun@1.3.2",
+  "dependencies": {
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@types/node": "^22.13.11"
+  }
+}
