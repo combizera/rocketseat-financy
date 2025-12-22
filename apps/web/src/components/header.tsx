@@ -1,27 +1,44 @@
 import { Link } from "@tanstack/react-router";
-
-import { ModeToggle } from "./mode-toggle";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { NavigationMenu } from "@/components/ui/navigation-menu"
 
 export default function Header() {
   const links = [{ to: "/", label: "Home" }] as const;
 
   return (
-    <div>
-      <div className="flex flex-row items-center justify-between px-2 py-1">
-        <nav className="flex gap-4 text-lg">
-          {links.map(({ to, label }) => {
-            return (
-              <Link key={to} to={to}>
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="flex items-center gap-2">
-          <ModeToggle />
-        </div>
-      </div>
-      <hr />
-    </div>
+    <header className="flex items-center justify-between px-4 py-2 border-b border-border bg-white">
+      {/* LOGO */}
+      <Link to="/" className="text-xl font-bold">
+        <img src="/images/logo.svg" alt="Logo" />
+      </Link>
+
+      {/* NAV */}
+      <nav>
+        <ul className="flex gap-2">
+          <li>
+            <Link className="p-2 text-sm text-gray-600 hover:text-brand-base hover:font-semibold transition-300" to="/">
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link className="p-2 text-sm text-gray-600 hover:text-brand hover:font-semibold transition-300" to="/">
+              Transações
+            </Link>
+          </li>
+          <li>
+            <Link className="p-2 text-sm text-gray-600 hover:text-brand hover:font-semibold transition-300" to="/">
+              Categorias
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* PROFILE */}
+      <Avatar>
+        <AvatarFallback>
+          YG
+        </AvatarFallback>
+      </Avatar>
+    </header>
   );
 }
