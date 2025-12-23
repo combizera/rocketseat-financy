@@ -1,44 +1,61 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { NavigationMenu } from "@/components/ui/navigation-menu"
+import { cn } from "@/lib/utils";
+
+interface MenuProps {
+  to: string;
+  label: string;
+}
 
 export default function Header() {
-  const links = [{ to: "/", label: "Home" }] as const;
+  const location = useLocation({ select: (loc) => loc.pathname });
+  const links: MenuProps[] = [
+    {
+      to: "/",
+      label: "Home"
+    },
+    {
+      to: "/rota",
+      label: "Rota",
+    },
+    {
+      to: "/about",
+      label: "About",
+    }
+  ];
 
   return (
-    <header className="flex items-center justify-between px-4 py-2 border-b border-border bg-white">
-      {/* LOGO */}
-      <Link to="/" className="text-xl font-bold">
-        <img src="/images/logo.svg" alt="Logo" />
-      </Link>
+    <header className="px-4 py-2 border-b border-border bg-white">
 
-      {/* NAV */}
-      <nav>
-        <ul className="flex gap-2">
-          <li>
-            <Link className="p-2 text-sm text-gray-600 hover:text-brand-base hover:font-semibold transition-300" to="/">
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link className="p-2 text-sm text-gray-600 hover:text-brand hover:font-semibold transition-300" to="/">
-              Transações
-            </Link>
-          </li>
-          <li>
-            <Link className="p-2 text-sm text-gray-600 hover:text-brand hover:font-semibold transition-300" to="/">
-              Categorias
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        {/* LOGO */}
+        <Link to="/" className="text-xl font-bold">
+          <img src="/images/logo.svg" alt="Logo" />
+        </Link>
 
-      {/* PROFILE */}
-      <Avatar>
-        <AvatarFallback>
-          YG
-        </AvatarFallback>
-      </Avatar>
+        {/* NAV */}
+        <nav>
+          <ul className="flex gap-2">
+            {
+              links.map((link, index) => (
+                <li key={index}>
+                  <Link className={cn("p-2 text-sm hover:text-brand hover:underline transition-300", location === link.to ? "font-semibold text-brand-base" : "text-gray-600")} to={link.to}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        {/* PROFILE */}
+        <Avatar>
+          <AvatarFallback>
+            YG
+          </AvatarFallback>
+        </Avatar>
+      </div>
+
     </header>
   );
 }
