@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { Lock, Mail, UserRound } from "lucide-react";
+import { Lock, LogIn, Mail, UserRound } from "lucide-react";
 
 export const Route = createFileRoute('/register')({
   component: RouteComponent,
@@ -99,6 +99,9 @@ function RouteComponent() {
 
           <Button variant="secondary" className="w-full" asChild>
             <Link to="/">
+              <LogIn
+                className="size-4.5 text-gray-400"
+              />
               Fazer Login
             </Link>
           </Button>

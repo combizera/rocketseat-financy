@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Lock, Mail } from "lucide-react";
+import { Lock, Mail, UserRoundPlus } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -97,7 +97,10 @@ function LoginComponent() {
           </CardDescription>
 
           <Button variant="secondary" className="w-full" asChild>
-            <Link to="/register">
+            <Link to="/register" className="text-gray-500">
+              <UserRoundPlus
+                className="size-4.5 text-gray-400"
+              />
               Criar conta
             </Link>
           </Button>
