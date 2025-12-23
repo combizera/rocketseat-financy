@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { Lock, Mail, UserRound } from "lucide-react";
 
 export const Route = createFileRoute('/register')({
   component: RouteComponent,
@@ -40,6 +41,7 @@ function RouteComponent() {
                   id="name"
                   type="text"
                   placeholder="Seu nome completo"
+                  icon={UserRound}
                   required
                 />
               </div>
@@ -51,6 +53,7 @@ function RouteComponent() {
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  icon={Mail}
                   required
                 />
               </div>
@@ -65,6 +68,7 @@ function RouteComponent() {
                   id="password"
                   type="password"
                   placeholder="********"
+                  icon={Lock}
                   required
                 />
                 <CardDescription className="text-gray-500 text-xs">

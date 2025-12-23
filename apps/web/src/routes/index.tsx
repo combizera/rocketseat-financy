@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -41,6 +42,7 @@ function LoginComponent() {
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  icon={Mail}
                   required
                 />
               </div>
@@ -55,6 +57,7 @@ function LoginComponent() {
                   id="password"
                   type="password"
                   placeholder="********"
+                  icon={Lock}
                   required
                 />
                 <div className="flex items-center justify-between">
