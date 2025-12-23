@@ -11,16 +11,16 @@ export default function Header() {
   const location = useLocation({ select: (loc) => loc.pathname });
   const links: MenuProps[] = [
     {
-      to: "/",
-      label: "Home"
+      to: "/dashboard",
+      label: "Dashboard",
     },
     {
-      to: "/rota",
-      label: "Rota",
+      to: "/transactions",
+      label: "Transactions",
     },
     {
-      to: "/about",
-      label: "About",
+      to: "/categories",
+      label: "Categories",
     }
   ];
 
