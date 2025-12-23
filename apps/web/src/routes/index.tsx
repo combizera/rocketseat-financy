@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -93,8 +93,10 @@ function LoginComponent() {
             Ainda não tem uma conta?
           </CardDescription>
 
-          <Button variant="secondary" className="w-full">
-            Criar conta
+          <Button variant="secondary" className="w-full" asChild>
+            <Link to="/register">
+              Criar conta
+            </Link>
           </Button>
         </CardFooter>
       </Card>
