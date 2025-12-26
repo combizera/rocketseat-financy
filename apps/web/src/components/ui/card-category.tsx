@@ -1,19 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Card } from "./card";
 import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface CardCategoryProps {
   title: string;
   buttonText: string;
-  buttonLink: string;
+  buttonLink: LinkProps["to"];
   children?: React.ReactNode;
+  className?: string;
 }
 
-export function CardCategory({ title, buttonText, buttonLink, children }: CardCategoryProps) {
+export function CardCategory({ title, buttonText, buttonLink, children, className }: CardCategoryProps) {
   return (
-    <Card className="flex flex-col gap-4 p-0">
-      <div className="flex justify-between border-b pb-2 pt-6 px-6">
-        <p className="text-gray-500 uppercase mt-[.5px]">
+    <Card className={cn(`flex flex-col gap-4 p-0`, className)}>
+      <div className="flex justify-between border-b pb-4 pt-6 px-6">
+        <p className="text-gray-500 uppercase mt-1">
           {title}
         </p>
         <Link

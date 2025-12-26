@@ -9,10 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -23,6 +30,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +43,57 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
   '/register': typeof RegisterRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
   '/register': typeof RegisterRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
   '/register': typeof RegisterRoute
+  '/transactions': typeof TransactionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/register'
+  fullPaths: '/' | '/categories' | '/dashboard' | '/register' | '/transactions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/register'
-  id: '__root__' | '/' | '/dashboard' | '/register'
+  to: '/' | '/categories' | '/dashboard' | '/register' | '/transactions'
+  id:
+    | '__root__'
+    | '/'
+    | '/categories'
+    | '/dashboard'
+    | '/register'
+    | '/transactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesRoute: typeof CategoriesRoute
   DashboardRoute: typeof DashboardRoute
   RegisterRoute: typeof RegisterRoute
+  TransactionsRoute: typeof TransactionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -75,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,8 +127,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesRoute: CategoriesRoute,
   DashboardRoute: DashboardRoute,
   RegisterRoute: RegisterRoute,
+  TransactionsRoute: TransactionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
