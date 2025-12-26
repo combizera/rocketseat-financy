@@ -48,6 +48,41 @@
   --color-gray-400: #9CA3AF;
   --color-gray-200: #E5E7EB;
   --color-gray-100: #F8F9FA;
+
+  /* Blue */
+  --color-blue-dark: #1D4ED8;
+  --color-blue-base: #2563EB;
+  --color-blue-light: #DBEAFE;
+
+  /* Purple */
+  --color-purple-dark: #7E22CE;
+  --color-purple-base: #9333EA;
+  --color-purple-light: #F3EBFF;
+
+  /* Pink */
+  --color-pink-dark: #BE185D;
+  --color-pink-base: #DB2777;
+  --color-pink-light: #FCE7F3;
+
+  /* Red */
+  --color-red-dark: #B91C1C;
+  --color-red-base: #DC2626;
+  --color-red-light: #FEE2E2;
+
+  /* Orange */
+  --color-orange-dark: #C2410C;
+  --color-orange-base: #EA580C;
+  --color-orange-light: #FFEDD5;
+
+  /* Yellow */
+  --color-yellow-dark: #A16207;
+  --color-yellow-base: #CA8A04;
+  --color-yellow-light: #F7F3CA;
+
+  /* Green */
+  --color-green-dark: #15803D;
+  --color-green-base: #16A34A;
+  --color-green-light: #E0FAE9;
 }
 
 @theme inline {
@@ -101,6 +136,41 @@
   --color-gray-400: var(--color-gray-400);
   --color-gray-200: var(--color-gray-200);
   --color-gray-100: var(--color-gray-100);
+
+  /* Blue */
+  --color-blue-dark: var(--color-blue-dark);
+  --color-blue-base: var(--color-blue-base);
+  --color-blue-light: var(--color-blue-light);
+
+  /* Purple */
+  --color-purple-dark: var(--color-purple-dark);
+  --color-purple-base: var(--color-purple-base);
+  --color-purple-light: var(--color-purple-light);
+
+  /* Pink */
+  --color-pink-dark: var(--color-pink-dark);
+  --color-pink-base: var(--color-pink-base);
+  --color-pink-light: var(--color-pink-light);
+
+  /* Red */
+  --color-red-dark: var(--color-red-dark);
+  --color-red-base: var(--color-red-base);
+  --color-red-light: var(--color-red-light);
+
+  /* Orange */
+  --color-orange-dark: var(--color-orange-dark);
+  --color-orange-base: var(--color-orange-base);
+  --color-orange-light: var(--color-orange-light);
+
+  /* Yellow */
+  --color-yellow-dark: var(--color-yellow-dark);
+  --color-yellow-base: var(--color-yellow-base);
+  --color-yellow-light: var(--color-yellow-light);
+
+  /* Green */
+  --color-green-dark: var(--color-green-dark);
+  --color-green-base: var(--color-green-base);
+  --color-green-light: var(--color-green-light);
 }
 
 @layer base {
