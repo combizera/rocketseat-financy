@@ -1,6 +1,6 @@
 import { CardCategory } from '@/components/ui/card-category'
 import { CardWidget } from '@/components/ui/card-widget'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import {
   CircleArrowDown,
   CircleArrowUp,
@@ -14,12 +14,14 @@ import {
   Heart,
   GraduationCap,
   type LucideIcon,
-  Circle
+  Circle,
+  Plus
 } from 'lucide-react'
 import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableRow,
 } from "@/components/ui/table"
 import { Badge, type BadgeColor } from '@/components/ui/badge'
@@ -230,6 +232,7 @@ function RouteComponent() {
           iconClass="text-red-base"
         />
 
+        {/* TRANSAÇÕES */}
         <CardCategory
           title="Transações Recentes"
           buttonText="Ver todas"
@@ -275,9 +278,20 @@ function RouteComponent() {
                 </TableRow>
               ))}
             </TableBody>
+
+            <TableFooter className="text-center flex justify-center w-[100%] p-4 w-full">
+              <Link
+                to="/categories"
+                className="flex text-center text-sm text-green-base hover:underline"
+              >
+                <Plus className="size-5" />
+                Nova Transação
+              </Link>
+            </TableFooter>
           </Table>
         </CardCategory>
 
+        {/* CATEGORIAS */}
         <CardCategory
           title="Categorias"
           buttonText="Gerenciar"
@@ -302,7 +316,6 @@ function RouteComponent() {
               ))}
             </TableBody>
           </Table>
-
         </CardCategory>
       </section>
     </main>

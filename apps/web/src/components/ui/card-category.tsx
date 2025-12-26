@@ -26,7 +26,7 @@ export function CardCategory({ title, buttonText, buttonLink, children, classNam
           <ChevronRight className="size-5" />
         </Link>
       </div>
-      <div className="px-4 pb-6">
+      <div>
         {children}
       </div>
     </Card>

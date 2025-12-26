@@ -11,7 +11,7 @@ interface CardWidgetProps {
 
 export function CardWidget({ icon: Icon, iconClass, title, subtitle }: CardWidgetProps) {
   return (
-    <Card className="flex flex-col gap-4 p-6">
+    <Card className="flex flex-col gap-2 p-6 pb-4">
       <div className="flex gap-2 items-center">
         <Icon className={`size-[20px] ${iconClass}`} />
         <p className="text-gray-500 uppercase">
