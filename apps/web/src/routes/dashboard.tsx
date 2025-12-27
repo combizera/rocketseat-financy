@@ -262,17 +262,17 @@ function RouteComponent() {
                     </Badge>
                   </TableCell>
 
-                  <TableCell className="text-right font-semibold flex items-center justify-end gap-1 text-gray-800 text-base pr-4">
-                    {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
-                    {transaction.type === "income" ? (
-                      <CircleArrowUp
-                        className="size-4 text-green-base ml-1"
-                      />
-                    ) : (
-                      <CircleArrowDown
-                        className="size-4 text-red-base ml-1"
-                      />
-                    )}
+                  <TableCell className="text-right pr-4">
+                    <div className="flex items-center justify-end gap-2">
+                      <span className="font-semibold text-gray-800 text-base">
+                        {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
+                      </span>
+                      {transaction.type === "income" ? (
+                        <CircleArrowUp className="size-4 text-green-base" />
+                      ) : (
+                        <CircleArrowDown className="size-4 text-red-base" />
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

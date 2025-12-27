@@ -25,7 +25,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="px-4 py-2 border-b border-border bg-white">
+    <header className="px-4 py-3 border-b border-border bg-white">
 
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* LOGO */}
