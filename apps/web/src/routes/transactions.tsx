@@ -3,8 +3,21 @@ import { CardCategory } from '@/components/ui/card-category'
 import PageTitle from '@/components/ui/page-title'
 import { Table, TableBody, TableCell, TableFooter, TableRow } from '@/components/ui/table'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { CircleArrowDown, CircleArrowUp, Plus } from 'lucide-react'
+import { CircleArrowDown, CircleArrowUp, Mail, Plus, Search } from 'lucide-react'
 import { transactions } from "@/data/mock/transactions";
+import { categories } from "@/data/mock/categories";
+import { Card } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export const Route = createFileRoute('/transactions')({
   component: RouteComponent,
@@ -23,9 +36,98 @@ function RouteComponent() {
         />
 
         {/* FILTERS */}
-        <div className='bg-gray-200 rounded-md w-full h-20'>
+        <Card className="w-full grid grid-cols-4 gap-4 p-6">
+          <div className="flex flex-col gap-2">
+            <Label className="text-gray-500">
+              Buscar
+            </Label>
+            <Input
+              id="search"
+              type="text"
+              placeholder="Buscar por Descrição"
+              icon={Search}
+              required
+            />
+          </div>
 
-        </div>
+          <div className="flex flex-col gap-2">
+            <Label className="text-gray-500">
+              Tipo
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>
+                    Type
+                  </SelectLabel>
+                  <SelectItem value="income">
+                    Income
+                  </SelectItem>
+                  <SelectItem value="expense">
+                    Expense
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label className="text-gray-500">
+              Categoria
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>
+                    Category
+                  </SelectLabel>
+                  {categories.map((category) => (
+                    <SelectItem key={category.id} value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  )
+                  )}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label className="text-gray-500">
+              Período
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a period" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>
+                    Mês
+                  </SelectLabel>
+                  <SelectItem value="janeiro">Janeiro</SelectItem>
+                  <SelectItem value="fevereiro">Fevereiro</SelectItem>
+                  <SelectItem value="marco">Março</SelectItem>
+                  <SelectItem value="abril">Abril</SelectItem>
+                  <SelectItem value="maio">Maio</SelectItem>
+                  <SelectItem value="junho">Junho</SelectItem>
+                  <SelectItem value="julho">Julho</SelectItem>
+                  <SelectItem value="agosto">Agosto</SelectItem>
+                  <SelectItem value="setembro">Setembro</SelectItem>
+                  <SelectItem value="outubro">Outubro</SelectItem>
+                  <SelectItem value="novembro">Novembro</SelectItem>
+                  <SelectItem value="dezembro">Dezembro</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </Card>
 
         {/* TABLE */}
         <CardCategory

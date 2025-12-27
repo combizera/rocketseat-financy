@@ -116,10 +116,10 @@ function RouteComponent() {
           <Table>
             <TableBody>
               {categories.map((category) => (
-                <TableRow key={category.categoryName}>
+                <TableRow key={category.id}>
                   <TableCell className="font-medium pl-4">
                     <Badge color={category.color}>
-                      {category.categoryName}
+                      {category.name}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
