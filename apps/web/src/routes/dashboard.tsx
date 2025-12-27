@@ -282,7 +282,7 @@ function RouteComponent() {
               <TableRow>
                 <TableCell colSpan={3} className="text-center p-4">
                   <Link
-                    to="/categories"
+                    to="/transactions"
                     className="inline-flex items-center gap-1 text-sm text-green-base hover:underline"
                   >
                     <Plus className="size-5" />
@@ -301,8 +301,8 @@ function RouteComponent() {
           buttonLink="/categories"
           className="pb-4"
         >
-          <Table className='!pb-4'>
-            <TableBody className='pb-4'>
+          <Table>
+            <TableBody>
               {categories.map((category) => (
                 <TableRow key={category.categoryName}>
                   <TableCell className="font-medium pl-4">
