@@ -14,7 +14,6 @@ import {
   Heart,
   GraduationCap,
   type LucideIcon,
-  Circle,
   Plus
 } from 'lucide-react'
 import {
@@ -242,12 +241,12 @@ function RouteComponent() {
           <Table>
             <TableBody>
               {transactions.map((transaction) => (
-                <TableRow key={transaction.id} className="">
-                  <TableCell className="flex items-center gap-2">
-                    <transaction.icon
-                      className="size-8 text-gray-500 p-2 rounded"
-                    />
-                    <div className="flex flex-col gap-1">
+                <TableRow key={transaction.id}>
+                  <TableCell className="flex items-center gap-2 pl-4">
+                    <div className={`p-2 rounded bg-${transaction.categoryColor}-light`}>
+                      <transaction.icon className="size-5" />
+                    </div>
+                    <div className="flex flex-col">
                       <p className="font-medium text-gray-800 text-[1rem]">
                         {transaction.title}
                       </p>
@@ -263,7 +262,7 @@ function RouteComponent() {
                     </Badge>
                   </TableCell>
 
-                  <TableCell className="text-right font-semibold flex items-center justify-end gap-1 text-gray-800 text-base">
+                  <TableCell className="text-right font-semibold flex items-center justify-end gap-1 text-gray-800 text-base pr-4">
                     {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
                     {transaction.type === "income" ? (
                       <CircleArrowUp
@@ -279,14 +278,18 @@ function RouteComponent() {
               ))}
             </TableBody>
 
-            <TableFooter className="text-center flex justify-center w-[100%] p-4 w-full">
-              <Link
-                to="/categories"
-                className="flex text-center text-sm text-green-base hover:underline"
-              >
-                <Plus className="size-5" />
-                Nova Transação
-              </Link>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={3} className="text-center p-4">
+                  <Link
+                    to="/categories"
+                    className="inline-flex items-center gap-1 text-sm text-green-base hover:underline"
+                  >
+                    <Plus className="size-5" />
+                    Nova Transação
+                  </Link>
+                </TableCell>
+              </TableRow>
             </TableFooter>
           </Table>
         </CardCategory>
@@ -296,12 +299,13 @@ function RouteComponent() {
           title="Categorias"
           buttonText="Gerenciar"
           buttonLink="/categories"
+          className="pb-4"
         >
-          <Table>
-            <TableBody>
+          <Table className='!pb-4'>
+            <TableBody className='pb-4'>
               {categories.map((category) => (
                 <TableRow key={category.categoryName}>
-                  <TableCell className="font-medium">
+                  <TableCell className="font-medium pl-4">
                     <Badge color={category.color}>
                       {category.categoryName}
                     </Badge>
@@ -309,7 +313,7 @@ function RouteComponent() {
                   <TableCell className="text-right">
                     {category.itemsCount} items
                   </TableCell>
-                  <TableCell className="text-right font-semibold text-gray-800">
+                  <TableCell className="text-right font-semibold text-gray-800 pr-4">
                     R$ {category.totalAmount}
                   </TableCell>
                 </TableRow>
