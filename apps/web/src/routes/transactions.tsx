@@ -57,12 +57,12 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue />
+                <SelectValue placeholder="Selecione o tipo" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>
-                    Type
+                    Tipo
                   </SelectLabel>
                   <SelectItem value="income">
                     Income
@@ -81,12 +81,12 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue />
+                <SelectValue placeholder="Selecione a Categoria" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>
-                    Category
+                    Categoria
                   </SelectLabel>
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.name}>
@@ -105,25 +105,25 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue />
+                <SelectValue placeholder="Selecione o período" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>
                     Mês
                   </SelectLabel>
-                  <SelectItem value="janeiro">Janeiro</SelectItem>
-                  <SelectItem value="fevereiro">Fevereiro</SelectItem>
-                  <SelectItem value="marco">Março</SelectItem>
-                  <SelectItem value="abril">Abril</SelectItem>
-                  <SelectItem value="maio">Maio</SelectItem>
-                  <SelectItem value="junho">Junho</SelectItem>
-                  <SelectItem value="julho">Julho</SelectItem>
-                  <SelectItem value="agosto">Agosto</SelectItem>
-                  <SelectItem value="setembro">Setembro</SelectItem>
-                  <SelectItem value="outubro">Outubro</SelectItem>
-                  <SelectItem value="novembro">Novembro</SelectItem>
-                  <SelectItem value="dezembro">Dezembro</SelectItem>
+                  <SelectItem value="jan">Janeiro</SelectItem>
+                  <SelectItem value="fev">Fevereiro</SelectItem>
+                  <SelectItem value="mar">Março</SelectItem>
+                  <SelectItem value="abr">Abril</SelectItem>
+                  <SelectItem value="mai">Maio</SelectItem>
+                  <SelectItem value="jun">Junho</SelectItem>
+                  <SelectItem value="jul">Julho</SelectItem>
+                  <SelectItem value="ago">Agosto</SelectItem>
+                  <SelectItem value="set">Setembro</SelectItem>
+                  <SelectItem value="out">Outubro</SelectItem>
+                  <SelectItem value="nov">Novembro</SelectItem>
+                  <SelectItem value="dez">Dezembro</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
