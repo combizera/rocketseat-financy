@@ -3,7 +3,7 @@ import { CardCategory } from '@/components/ui/card-category'
 import PageTitle from '@/components/ui/page-title'
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowUpIcon, CircleArrowDown, CircleArrowUp, Plus, Search } from 'lucide-react'
+import { ArrowUpIcon, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Plus, Search, SquarePen, Trash } from 'lucide-react'
 import { transactions } from "@/data/mock/transactions";
 import { categories } from "@/data/mock/categories";
 import { Card } from '@/components/ui/card'
@@ -213,9 +213,23 @@ function RouteComponent() {
                   </TableCell>
 
 
-                  <TableCell className="text-right pr-4">
-                    <Button variant="outline" size="icon" aria-label="Submit">
-                      <ArrowUpIcon />
+                  <TableCell className="text-right pr-4 flex items-center justify-end gap-1">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      aria-label="Submit"
+                      className="py-3 px-3"
+                    >
+                      <Trash className="text-[#EF4444]" />
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      aria-label="Submit"
+                      className="py-3 px-3"
+                    >
+                      <SquarePen />
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -224,8 +238,57 @@ function RouteComponent() {
 
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={6} className="text-center p-4">
-                  Adicionar footer
+                <TableCell colSpan={6} className="p-4">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-md text-gray-700">
+                        1 a 10 | 27 resultados
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="py-3 px-3"
+                        disabled
+                      >
+                        <ChevronLeft />
+                      </Button>
+
+                      <Button
+                        variant="default"
+                        size="icon"
+                        className="py-3 px-3 text-md"
+                      >
+                        1
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="py-3 px-3 text-md"
+                      >
+                        2
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="py-3 px-3 text-md"
+                      >
+                        2
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="py-3 px-3"
+                      >
+                        <ChevronRight />
+                      </Button>
+                    </div>
+                  </div>
                 </TableCell>
               </TableRow>
             </TableFooter>

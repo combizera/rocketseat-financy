@@ -1,3 +1,4 @@
+import PageTitle from '@/components/ui/page-title'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/categories')({
@@ -5,5 +6,17 @@ export const Route = createFileRoute('/categories')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/categories"!</div>
+  return (
+    <main className="max-w-7xl mx-auto py-12 px-4 w-[100%]">
+      <section className="flex flex-col gap-6 items-start mb-8">
+        {/* TITLE */}
+        <PageTitle
+          title="Categorias"
+          description="Organize suas transações por categorias"
+          buttonText="Nova Categoria"
+          buttonLink="/categories"
+        />
+      </section>
+    </main>
+  );
 }

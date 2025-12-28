@@ -16,11 +16,11 @@ export default function Header() {
     },
     {
       to: "/transactions",
-      label: "Transactions",
+      label: "Transações",
     },
     {
       to: "/categories",
-      label: "Categories",
+      label: "Categorias",
     }
   ];
 
