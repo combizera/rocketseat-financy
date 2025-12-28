@@ -30,7 +30,6 @@ const badgeVariants = cva(
   }
 )
 
-
 export type BadgeColor = "blue" | "purple" | "pink" | "red" | "orange" | "yellow" | "green";
 
 interface BadgeProps extends useRender.ComponentProps<"span">, VariantProps<typeof badgeVariants> {
