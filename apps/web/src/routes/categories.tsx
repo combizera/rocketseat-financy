@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import CategoryCards from "@/components/categories/category-cards"
 import CategoryWidgets from "@/components/categories/category-widgets"
 import PageTitle from "@/components/ui/page-title"
 
@@ -20,6 +21,9 @@ function RouteComponent() {
 
         {/* WIDGETS */}
         <CategoryWidgets />
+
+        {/* CARDS */}
+        <CategoryCards />
       </section>
     </main>
   )

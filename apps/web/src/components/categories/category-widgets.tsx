@@ -3,7 +3,7 @@ import { CardWidget } from "../ui/card-widget";
 
 export default function CategoryWidgets() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+    <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
       <CardWidget
         title="8"
         subtitle="Total de Categorias"
@@ -26,6 +26,6 @@ export default function CategoryWidgets() {
         icon={Utensils}
         variant="compact"
       />
-    </ div>
+    </section>
   )
 }
