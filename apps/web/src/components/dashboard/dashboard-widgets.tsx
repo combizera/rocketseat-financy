@@ -1,6 +1,6 @@
-import { CircleArrowDown, CircleArrowUp, Wallet } from "lucide-react";
+import { CircleArrowDown, CircleArrowUp, Wallet } from "lucide-react"
 
-import { CardWidget } from "../ui/card-widget";
+import { CardWidget } from "../ui/card-widget"
 
 export default function DashboardWidgets() {
   return (

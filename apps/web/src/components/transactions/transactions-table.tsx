@@ -1,37 +1,40 @@
-import { ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, SquarePen, Trash } from 'lucide-react'
+import {
+  ChevronLeft,
+  ChevronRight,
+  CircleArrowDown,
+  CircleArrowUp,
+  SquarePen,
+  Trash,
+} from "lucide-react"
 
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { transactions } from "@/data/mock/transactions";
-import { CardCategory } from '@/components/ui/card-category'
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { CardCategory } from "@/components/ui/card-category"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { transactions } from "@/data/mock/transactions"
 
 export default function TransactionsTable() {
   return (
-    <CardCategory
-      className="w-full rounded-none"
-    >
+    <CardCategory className="w-full rounded-none">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="text-left pl-4 max-w-[350px]">
               Descrição
             </TableHead>
-            <TableHead>
-              Data
-            </TableHead>
-            <TableHead>
-              Categoria
-            </TableHead>
-            <TableHead>
-              Tipo
-            </TableHead>
-            <TableHead className="text-right">
-              Valor
-            </TableHead>
-            <TableHead className="pr-4 text-right">
-              Ações
-            </TableHead>
+            <TableHead>Data</TableHead>
+            <TableHead>Categoria</TableHead>
+            <TableHead>Tipo</TableHead>
+            <TableHead className="text-right">Valor</TableHead>
+            <TableHead className="pr-4 text-right">Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -39,7 +42,9 @@ export default function TransactionsTable() {
             <TableRow key={transaction.id}>
               {/* DESCRIÇÃO */}
               <TableCell className="flex items-center gap-2 pl-4">
-                <div className={`p-2 rounded bg-${transaction.categoryColor}-light`}>
+                <div
+                  className={`p-2 rounded bg-${transaction.categoryColor}-light`}
+                >
                   <transaction.icon className="size-5" />
                 </div>
                 <p className="font-medium text-gray-800 text-[1rem]">
@@ -49,9 +54,7 @@ export default function TransactionsTable() {
 
               {/* DATA */}
               <TableCell>
-                <p className="text-gray-600 text-sm">
-                  {transaction.date}
-                </p>
+                <p className="text-gray-600 text-sm">{transaction.date}</p>
               </TableCell>
 
               {/* CATEGORIA */}
@@ -66,16 +69,12 @@ export default function TransactionsTable() {
                 {transaction.type === "income" ? (
                   <div className="flex items-center justify-center gap-1">
                     <CircleArrowUp className="size-4 text-green-dark" />
-                    <p className="text-green-dark text-sm">
-                      Entrada
-                    </p>
+                    <p className="text-green-dark text-sm">Entrada</p>
                   </div>
                 ) : (
                   <div className="flex items-center justify-center gap-1">
                     <CircleArrowDown className="size-4 text-red-dark" />
-                    <p className="text-red-dark text-sm">
-                      Saída
-                    </p>
+                    <p className="text-red-dark text-sm">Saída</p>
                   </div>
                 )}
               </TableCell>
@@ -84,11 +83,11 @@ export default function TransactionsTable() {
               <TableCell>
                 <div className="flex items-center justify-end gap-2">
                   <span className="font-semibold text-gray-800 text-sm">
-                    {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
+                    {transaction.type === "income" ? "+" : "-"} R${" "}
+                    {transaction.amount.toFixed(2)}
                   </span>
                 </div>
               </TableCell>
-
 
               <TableCell className="text-right pr-4 flex items-center justify-end gap-1">
                 <Button
@@ -157,11 +156,7 @@ export default function TransactionsTable() {
                     3
                   </Button>
 
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="py-3 px-3"
-                  >
+                  <Button variant="outline" size="icon" className="py-3 px-3">
                     <ChevronRight />
                   </Button>
                 </div>

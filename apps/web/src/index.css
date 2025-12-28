@@ -38,51 +38,51 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --color-brand-base: #1F6F43;
-  --color-brand-dark: #124B2B;
+  --color-brand-base: #1f6f43;
+  --color-brand-dark: #124b2b;
 
   --color-gray-800: #111827;
   --color-gray-700: #374151;
-  --color-gray-600: #4B5563;
-  --color-gray-500: #6B7280;
-  --color-gray-400: #9CA3AF;
-  --color-gray-200: #E5E7EB;
-  --color-gray-100: #F8F9FA;
+  --color-gray-600: #4b5563;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-gray-100: #f8f9fa;
 
   /* Blue */
-  --color-blue-dark: #1D4ED8;
-  --color-blue-base: #2563EB;
-  --color-blue-light: #DBEAFE;
+  --color-blue-dark: #1d4ed8;
+  --color-blue-base: #2563eb;
+  --color-blue-light: #dbeafe;
 
   /* Purple */
-  --color-purple-dark: #7E22CE;
-  --color-purple-base: #9333EA;
-  --color-purple-light: #F3EBFF;
+  --color-purple-dark: #7e22ce;
+  --color-purple-base: #9333ea;
+  --color-purple-light: #f3ebff;
 
   /* Pink */
-  --color-pink-dark: #BE185D;
-  --color-pink-base: #DB2777;
-  --color-pink-light: #FCE7F3;
+  --color-pink-dark: #be185d;
+  --color-pink-base: #db2777;
+  --color-pink-light: #fce7f3;
 
   /* Red */
-  --color-red-dark: #B91C1C;
-  --color-red-base: #DC2626;
-  --color-red-light: #FEE2E2;
+  --color-red-dark: #b91c1c;
+  --color-red-base: #dc2626;
+  --color-red-light: #fee2e2;
 
   /* Orange */
-  --color-orange-dark: #C2410C;
-  --color-orange-base: #EA580C;
-  --color-orange-light: #FFEDD5;
+  --color-orange-dark: #c2410c;
+  --color-orange-base: #ea580c;
+  --color-orange-light: #ffedd5;
 
   /* Yellow */
-  --color-yellow-dark: #A16207;
-  --color-yellow-base: #CA8A04;
-  --color-yellow-light: #F7F3CA;
+  --color-yellow-dark: #a16207;
+  --color-yellow-base: #ca8a04;
+  --color-yellow-light: #f7f3ca;
 
   /* Green */
-  --color-green-dark: #15803D;
-  --color-green-base: #16A34A;
-  --color-green-light: #E0FAE9;
+  --color-green-dark: #15803d;
+  --color-green-base: #16a34a;
+  --color-green-light: #e0fae9;
 }
 
 @theme inline {

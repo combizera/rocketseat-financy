@@ -1,7 +1,7 @@
-import { categories } from "@/data/mock/categories";
-import { Card } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+import { Search } from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
@@ -11,15 +11,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Search } from "lucide-react";
+import { categories } from "@/data/mock/categories"
 
 export default function TransactionsFilters() {
   return (
     <Card className="w-full grid grid-cols-4 gap-4 p-6">
       <div className="flex flex-col gap-2">
-        <Label className="text-gray-500">
-          Buscar
-        </Label>
+        <Label className="text-gray-500">Buscar</Label>
         <Input
           id="search"
           type="text"
@@ -30,66 +28,49 @@ export default function TransactionsFilters() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label className="text-gray-500">
-          Tipo
-        </Label>
+        <Label className="text-gray-500">Tipo</Label>
         <Select>
           <SelectTrigger className="w-full !h-[46px]">
             <SelectValue placeholder="Selecione o tipo" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>
-                Tipo
-              </SelectLabel>
-              <SelectItem value="income">
-                Income
-              </SelectItem>
-              <SelectItem value="expense">
-                Expense
-              </SelectItem>
+              <SelectLabel>Tipo</SelectLabel>
+              <SelectItem value="income">Income</SelectItem>
+              <SelectItem value="expense">Expense</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label className="text-gray-500">
-          Categoria
-        </Label>
+        <Label className="text-gray-500">Categoria</Label>
         <Select>
           <SelectTrigger className="w-full !h-[46px]">
             <SelectValue placeholder="Selecione a Categoria" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>
-                Categoria
-              </SelectLabel>
+              <SelectLabel>Categoria</SelectLabel>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.name}>
                   {category.name}
                 </SelectItem>
-              )
-              )}
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label className="text-gray-500">
-          Período
-        </Label>
+        <Label className="text-gray-500">Período</Label>
         <Select>
           <SelectTrigger className="w-full !h-[46px]">
             <SelectValue placeholder="Selecione o período" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>
-                Mês
-              </SelectLabel>
+              <SelectLabel>Mês</SelectLabel>
               <SelectItem value="jan">Janeiro</SelectItem>
               <SelectItem value="fev">Fevereiro</SelectItem>
               <SelectItem value="mar">Março</SelectItem>

@@ -1,7 +1,6 @@
-import { Link } from "@tanstack/react-router";
-import { CircleArrowDown, CircleArrowUp, Plus } from "lucide-react";
-
-import { CardCategory } from "../ui/card-category";
+import { Link } from "@tanstack/react-router"
+import { CircleArrowDown, CircleArrowUp, Plus } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import {
   Table,
   TableBody,
@@ -9,8 +8,8 @@ import {
   TableFooter,
   TableRow,
 } from "@/components/ui/table"
-import { Badge } from '@/components/ui/badge'
-import { transactions } from "@/data/mock/transactions";
+import { transactions } from "@/data/mock/transactions"
+import { CardCategory } from "../ui/card-category"
 
 export default function DashboardTable() {
   return (
@@ -25,16 +24,16 @@ export default function DashboardTable() {
           {transactions.map((transaction) => (
             <TableRow key={transaction.id}>
               <TableCell className="flex items-center gap-2 pl-4">
-                <div className={`p-2 rounded bg-${transaction.categoryColor}-light`}>
+                <div
+                  className={`p-2 rounded bg-${transaction.categoryColor}-light`}
+                >
                   <transaction.icon className="size-5" />
                 </div>
                 <div className="flex flex-col">
                   <p className="font-medium text-gray-800 text-[1rem]">
                     {transaction.title}
                   </p>
-                  <p className="text-xs text-gray-400">
-                    {transaction.date}
-                  </p>
+                  <p className="text-xs text-gray-400">{transaction.date}</p>
                 </div>
               </TableCell>
 
@@ -47,7 +46,8 @@ export default function DashboardTable() {
               <TableCell className="text-right pr-4">
                 <div className="flex items-center justify-end gap-2">
                   <span className="font-semibold text-gray-800 text-base">
-                    {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
+                    {transaction.type === "income" ? "+" : "-"} R${" "}
+                    {transaction.amount.toFixed(2)}
                   </span>
                   {transaction.type === "income" ? (
                     <CircleArrowUp className="size-4 text-green-base" />

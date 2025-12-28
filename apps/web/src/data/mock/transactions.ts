@@ -1,5 +1,14 @@
-import type { Transaction } from "@/types/transaction";
-import { Car, GraduationCap, Heart, Home, ShoppingCart, TrendingUp, Utensils, Wallet } from "lucide-react";
+import {
+  Car,
+  GraduationCap,
+  Heart,
+  Home,
+  ShoppingCart,
+  TrendingUp,
+  Utensils,
+  Wallet,
+} from "lucide-react"
+import type { Transaction } from "@/types/transaction"
 
 export const transactions: Transaction[] = [
   {
@@ -9,7 +18,7 @@ export const transactions: Transaction[] = [
     date: "01/12/25",
     category: "Receita",
     categoryColor: "green",
-    amount: 4250.00,
+    amount: 4250.0,
     type: "income",
   },
   {
@@ -19,7 +28,7 @@ export const transactions: Transaction[] = [
     date: "30/11/25",
     category: "Alimentação",
     categoryColor: "blue",
-    amount: 89.50,
+    amount: 89.5,
     type: "expense",
   },
   {
@@ -29,7 +38,7 @@ export const transactions: Transaction[] = [
     date: "29/11/25",
     category: "Transporte",
     categoryColor: "purple",
-    amount: 100.00,
+    amount: 100.0,
     type: "expense",
   },
   {
@@ -39,7 +48,7 @@ export const transactions: Transaction[] = [
     date: "28/11/25",
     category: "Mercado",
     categoryColor: "orange",
-    amount: 156.80,
+    amount: 156.8,
     type: "expense",
   },
   {
@@ -59,7 +68,7 @@ export const transactions: Transaction[] = [
     date: "24/11/25",
     category: "Utilidades",
     categoryColor: "yellow",
-    amount: 145.30,
+    amount: 145.3,
     type: "expense",
   },
   {
@@ -69,7 +78,7 @@ export const transactions: Transaction[] = [
     date: "23/11/25",
     category: "Saúde",
     categoryColor: "green",
-    amount: 280.00,
+    amount: 280.0,
     type: "expense",
   },
   {
@@ -79,7 +88,7 @@ export const transactions: Transaction[] = [
     date: "22/11/25",
     category: "Alimentação",
     categoryColor: "blue",
-    amount: 45.00,
+    amount: 45.0,
     type: "expense",
   },
   {
@@ -89,7 +98,7 @@ export const transactions: Transaction[] = [
     date: "21/11/25",
     category: "Educação",
     categoryColor: "blue",
-    amount: 197.00,
+    amount: 197.0,
     type: "expense",
   },
   {
@@ -99,7 +108,7 @@ export const transactions: Transaction[] = [
     date: "20/11/25",
     category: "Receita",
     categoryColor: "green",
-    amount: 1500.00,
+    amount: 1500.0,
     type: "income",
   },
   {
@@ -109,7 +118,7 @@ export const transactions: Transaction[] = [
     date: "19/11/25",
     category: "Transporte",
     categoryColor: "purple",
-    amount: 28.50,
+    amount: 28.5,
     type: "expense",
   },
-];
+]

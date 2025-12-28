@@ -1,26 +1,27 @@
-import { Wallet } from "lucide-react";
-import { Card } from "./card";
-import type { ElementType } from "react";
+import { Wallet } from "lucide-react"
+import type { ElementType } from "react"
+import { Card } from "./card"
 
 interface CardWidgetProps {
-  icon: ElementType;
-  iconClass?: string;
-  title: string;
-  subtitle: string;
+  icon: ElementType
+  iconClass?: string
+  title: string
+  subtitle: string
 }
 
-export function CardWidget({ icon: Icon, iconClass, title, subtitle }: CardWidgetProps) {
+export function CardWidget({
+  icon: Icon,
+  iconClass,
+  title,
+  subtitle,
+}: CardWidgetProps) {
   return (
     <Card className="flex flex-col gap-2 p-6 pb-4">
       <div className="flex gap-2 items-center">
         <Icon className={`size-[20px] ${iconClass}`} />
-        <p className="text-gray-500 uppercase">
-          {subtitle}
-        </p>
+        <p className="text-gray-500 uppercase">{subtitle}</p>
       </div>
-      <h2 className="text-gray-800 font-bold text-[28px]">
-        {title}
-      </h2>
+      <h2 className="text-gray-800 font-bold text-[28px]">{title}</h2>
     </Card>
   )
 }

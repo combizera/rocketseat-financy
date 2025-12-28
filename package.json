@@ -2,10 +2,7 @@
   "name": "financy",
   "private": true,
   "workspaces": {
-    "packages": [
-      "apps/*",
-      "packages/*"
-    ],
+    "packages": ["apps/*", "packages/*"],
     "catalog": {
       "dotenv": "^17.2.2",
       "zod": "^4.1.13",
@@ -16,6 +13,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --filter '*' dev",
+    "format": "bunx biome format --write",
     "build": "bun run --filter '*' build",
     "check-types": "bun run --filter '*' check-types",
     "dev:native": "bun run --filter native dev",

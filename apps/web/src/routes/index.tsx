@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Lock, Mail, UserRoundPlus } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router"
+import { Lock, Mail, UserRoundPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,35 +9,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
 
 export const Route = createFileRoute("/")({
   component: LoginComponent,
-});
+})
 
 function LoginComponent() {
   return (
     <div className="flex justify-center items-center">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="fon">
-            Fazer login
-          </CardTitle>
-          <CardDescription>
-            Entre na sua conta para continuar
-          </CardDescription>
+          <CardTitle className="fon">Fazer login</CardTitle>
+          <CardDescription>Entre na sua conta para continuar</CardDescription>
         </CardHeader>
 
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">
-                  E-mail
-                </Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
@@ -48,10 +42,7 @@ function LoginComponent() {
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">
-                    Senha
-                  </Label>
-
+                  <Label htmlFor="password">Senha</Label>
                 </div>
                 <Input
                   id="password"
@@ -63,9 +54,7 @@ function LoginComponent() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2 my-2">
                     <Checkbox id="remember" />
-                    <Label htmlFor="remember">
-                      Lembrar-me
-                    </Label>
+                    <Label htmlFor="remember">Lembrar-me</Label>
                   </div>
                   <a
                     href="#"
@@ -83,29 +72,22 @@ function LoginComponent() {
         </CardContent>
 
         <CardFooter className="flex-col gap-2">
-
           <div className="flex items-center gap-2 w-full">
             <Separator className="flex-1" />
-            <CardDescription className="text-gray-500">
-              ou
-            </CardDescription>
+            <CardDescription className="text-gray-500">ou</CardDescription>
             <Separator className="flex-1" />
           </div>
 
-          <CardDescription>
-            Ainda não tem uma conta?
-          </CardDescription>
+          <CardDescription>Ainda não tem uma conta?</CardDescription>
 
           <Button variant="secondary" className="w-full" asChild>
             <Link to="/register" className="text-gray-500">
-              <UserRoundPlus
-                className="size-4.5 text-gray-400"
-              />
+              <UserRoundPlus className="size-4.5 text-gray-400" />
               Criar conta
             </Link>
           </Button>
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { Badge } from '../ui/badge';
-import { CardCategory } from '../ui/card-category'
-import { categories } from '@/data/mock/categories';
-import { Table, TableBody, TableCell, TableRow } from '../ui/table';
+import { categories } from "@/data/mock/categories"
+import { Badge } from "../ui/badge"
+import { CardCategory } from "../ui/card-category"
+import { Table, TableBody, TableCell, TableRow } from "../ui/table"
 
 export default function DashboardCategories() {
   return (
@@ -16,9 +16,7 @@ export default function DashboardCategories() {
           {categories.map((category) => (
             <TableRow key={category.id}>
               <TableCell className="font-medium pl-4">
-                <Badge color={category.color}>
-                  {category.name}
-                </Badge>
+                <Badge color={category.color}>{category.name}</Badge>
               </TableCell>
               <TableCell className="text-right">
                 {category.itemsCount} items
@@ -30,6 +28,6 @@ export default function DashboardCategories() {
           ))}
         </TableBody>
       </Table>
-    </CardCategory >
-  );
+    </CardCategory>
+  )
 }

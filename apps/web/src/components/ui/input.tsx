@@ -1,11 +1,11 @@
-import { Input as InputPrimitive } from "@base-ui/react/input";
-import { type LucideIcon } from "lucide-react";
-import * as React from "react";
+import { Input as InputPrimitive } from "@base-ui/react/input"
+import { type LucideIcon } from "lucide-react"
+import * as React from "react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 interface InputProps extends React.ComponentProps<"input"> {
-  icon?: LucideIcon;
+  icon?: LucideIcon
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -50,7 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-      );
+      )
     }
 
     return (
@@ -84,10 +84,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         {...props}
       />
-    );
-  }
-);
+    )
+  },
+)
 
-Input.displayName = "Input";
+Input.displayName = "Input"
 
-export { Input };
+export { Input }

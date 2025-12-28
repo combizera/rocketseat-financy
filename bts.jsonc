@@ -9,9 +9,7 @@
   "orm": "prisma",
   "backend": "fastify",
   "runtime": "node",
-  "frontend": [
-    "tanstack-router"
-  ],
+  "frontend": ["tanstack-router"],
   "addons": [],
   "examples": [],
   "auth": "none",

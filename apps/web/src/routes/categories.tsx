@@ -1,7 +1,7 @@
-import PageTitle from '@/components/ui/page-title'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router"
+import PageTitle from "@/components/ui/page-title"
 
-export const Route = createFileRoute('/categories')({
+export const Route = createFileRoute("/categories")({
   component: RouteComponent,
 })
 
@@ -18,5 +18,5 @@ function RouteComponent() {
         />
       </section>
     </main>
-  );
+  )
 }

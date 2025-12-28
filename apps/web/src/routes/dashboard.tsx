@@ -1,10 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router"
+import TransactionsCategories from "@/components/dashboard/dashboard-categories"
+import TransactionsTable from "@/components/dashboard/dashboard-table"
+import TransactionsWidgets from "@/components/dashboard/dashboard-widgets"
 
-import TransactionsTable from '@/components/dashboard/dashboard-table'
-import TransactionsWidgets from '@/components/dashboard/dashboard-widgets'
-import TransactionsCategories from '@/components/dashboard/dashboard-categories'
-
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute("/dashboard")({
   component: RouteComponent,
 })
 

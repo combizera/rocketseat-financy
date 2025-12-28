@@ -1,18 +1,18 @@
-import type { Category } from "@/types/category";
+import type { Category } from "@/types/category"
 
 export const categories: Category[] = [
   {
     id: "1",
     name: "Alimentação",
     itemsCount: 12,
-    totalAmount: 1542.30,
+    totalAmount: 1542.3,
     color: "blue",
   },
   {
     id: "2",
     name: "Transporte",
     itemsCount: 8,
-    totalAmount: 385.50,
+    totalAmount: 385.5,
     color: "purple",
   },
   {
@@ -26,14 +26,14 @@ export const categories: Category[] = [
     id: "4",
     name: "Entretenimento",
     itemsCount: 2,
-    totalAmount: 186.20,
+    totalAmount: 186.2,
     color: "pink",
   },
   {
     id: "5",
     name: "Utilidades",
     itemsCount: 7,
-    totalAmount: 245.80,
+    totalAmount: 245.8,
     color: "yellow",
   },
 ]

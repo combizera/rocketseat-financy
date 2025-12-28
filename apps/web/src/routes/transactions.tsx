@@ -1,11 +1,9 @@
+import { createFileRoute } from "@tanstack/react-router"
+import TransactionsFilters from "@/components/transactions/transactions-filters"
+import TransactionsTable from "@/components/transactions/transactions-table"
+import PageTitle from "@/components/ui/page-title"
 
-import PageTitle from '@/components/ui/page-title'
-import { createFileRoute } from '@tanstack/react-router'
-
-import TransactionsFilters from '@/components/transactions/transactions-filters'
-import TransactionsTable from '@/components/transactions/transactions-table'
-
-export const Route = createFileRoute('/transactions')({
+export const Route = createFileRoute("/transactions")({
   component: RouteComponent,
 })
 

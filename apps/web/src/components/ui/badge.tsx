@@ -10,9 +10,12 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
-        secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
-        destructive: "bg-destructive/10 [a]:hover:bg-destructive/20 focus-visible:ring-destructive/20 text-destructive",
-        outline: "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+        destructive:
+          "bg-destructive/10 [a]:hover:bg-destructive/20 focus-visible:ring-destructive/20 text-destructive",
+        outline:
+          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
         ghost: "hover:bg-muted hover:text-muted-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         blue: "bg-blue-light text-blue-dark",
@@ -27,13 +30,22 @@ const badgeVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 )
 
-export type BadgeColor = "blue" | "purple" | "pink" | "red" | "orange" | "yellow" | "green";
+export type BadgeColor =
+  | "blue"
+  | "purple"
+  | "pink"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
 
-interface BadgeProps extends useRender.ComponentProps<"span">, VariantProps<typeof badgeVariants> {
-  color?: BadgeColor;
+interface BadgeProps
+  extends useRender.ComponentProps<"span">,
+    VariantProps<typeof badgeVariants> {
+  color?: BadgeColor
 }
 
 function Badge({
@@ -43,14 +55,14 @@ function Badge({
   color,
   ...props
 }: BadgeProps) {
-  const colorVariant = color ?? variant;
+  const colorVariant = color ?? variant
   return useRender({
     defaultTagName: "span",
     props: mergeProps<"span">(
       {
         className: cn(badgeVariants({ className, variant: colorVariant })),
       },
-      props
+      props,
     ),
     render,
     state: {
