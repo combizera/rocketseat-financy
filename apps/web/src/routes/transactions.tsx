@@ -56,7 +56,7 @@ function RouteComponent() {
               Tipo
             </Label>
             <Select>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full !h-[46px]">
                 <SelectValue placeholder="Selecione o tipo" />
               </SelectTrigger>
               <SelectContent>
@@ -80,7 +80,7 @@ function RouteComponent() {
               Categoria
             </Label>
             <Select>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full !h-[46px]">
                 <SelectValue placeholder="Selecione a Categoria" />
               </SelectTrigger>
               <SelectContent>
@@ -104,7 +104,7 @@ function RouteComponent() {
               Período
             </Label>
             <Select>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full !h-[46px]">
                 <SelectValue placeholder="Selecione o período" />
               </SelectTrigger>
               <SelectContent>
