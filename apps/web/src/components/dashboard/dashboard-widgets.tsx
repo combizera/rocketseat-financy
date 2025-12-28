@@ -2,7 +2,7 @@ import { CircleArrowDown, CircleArrowUp, Wallet } from "lucide-react";
 
 import { CardWidget } from "../ui/card-widget";
 
-export default function TransactionsWidgets() {
+export default function DashboardWidgets() {
   return (
     <>
       <CardWidget

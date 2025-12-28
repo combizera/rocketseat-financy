@@ -12,7 +12,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { transactions } from "@/data/mock/transactions";
 
-export default function TransactionsTable() {
+export default function DashboardTable() {
   return (
     <CardCategory
       title="Transações Recentes"

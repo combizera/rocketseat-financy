@@ -3,7 +3,7 @@ import { CardCategory } from '../ui/card-category'
 import { categories } from '@/data/mock/categories';
 import { Table, TableBody, TableCell, TableRow } from '../ui/table';
 
-export default function TransactionsCategories() {
+export default function DashboardCategories() {
   return (
     <CardCategory
       title="Categorias"
