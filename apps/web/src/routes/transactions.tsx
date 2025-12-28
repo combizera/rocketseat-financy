@@ -1,9 +1,9 @@
 import { Badge } from '@/components/ui/badge'
 import { CardCategory } from '@/components/ui/card-category'
 import PageTitle from '@/components/ui/page-title'
-import { Table, TableBody, TableCell, TableFooter, TableRow } from '@/components/ui/table'
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { CircleArrowDown, CircleArrowUp, Mail, Plus, Search } from 'lucide-react'
+import { ArrowUpIcon, CircleArrowDown, CircleArrowUp, Plus, Search } from 'lucide-react'
 import { transactions } from "@/data/mock/transactions";
 import { categories } from "@/data/mock/categories";
 import { Card } from '@/components/ui/card'
@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/transactions')({
   component: RouteComponent,
@@ -56,7 +57,7 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a type" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -80,7 +81,7 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a category" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -104,7 +105,7 @@ function RouteComponent() {
             </Label>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a period" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -131,46 +132,91 @@ function RouteComponent() {
 
         {/* TABLE */}
         <CardCategory
-          title="Transações Recentes"
-          buttonText="Ver todas"
-          buttonLink="/transactions"
           className="w-full"
         >
           <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-left pl-4 max-w-[350px]">
+                  Descrição
+                </TableHead>
+                <TableHead>
+                  Data
+                </TableHead>
+                <TableHead>
+                  Categoria
+                </TableHead>
+                <TableHead>
+                  Tipo
+                </TableHead>
+                <TableHead className="text-right">
+                  Valor
+                </TableHead>
+                <TableHead className="pr-4 text-right">
+                  Ações
+                </TableHead>
+              </TableRow>
+            </TableHeader>
             <TableBody>
               {transactions.map((transaction) => (
                 <TableRow key={transaction.id}>
+                  {/* DESCRIÇÃO */}
                   <TableCell className="flex items-center gap-2 pl-4">
                     <div className={`p-2 rounded bg-${transaction.categoryColor}-light`}>
                       <transaction.icon className="size-5" />
                     </div>
-                    <div className="flex flex-col">
-                      <p className="font-medium text-gray-800 text-[1rem]">
-                        {transaction.title}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        {transaction.date}
-                      </p>
-                    </div>
+                    <p className="font-medium text-gray-800 text-[1rem]">
+                      {transaction.title}
+                    </p>
                   </TableCell>
 
-                  <TableCell className="text-right">
+                  {/* DATA */}
+                  <TableCell>
+                    <p className="text-gray-600 text-sm">
+                      {transaction.date}
+                    </p>
+                  </TableCell>
+
+                  {/* CATEGORIA */}
+                  <TableCell className="text-center">
                     <Badge color={transaction.categoryColor}>
                       {transaction.category}
                     </Badge>
                   </TableCell>
 
-                  <TableCell className="text-right pr-4">
+                  {/* TIPO */}
+                  <TableCell>
+                    {transaction.type === "income" ? (
+                      <div className="flex items-center justify-center gap-1">
+                        <CircleArrowUp className="size-4 text-green-dark" />
+                        <p className="text-green-dark text-sm">
+                          Entrada
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-1">
+                        <CircleArrowDown className="size-4 text-red-dark" />
+                        <p className="text-red-dark text-sm">
+                          Saída
+                        </p>
+                      </div>
+                    )}
+                  </TableCell>
+
+                  {/* VALOR */}
+                  <TableCell>
                     <div className="flex items-center justify-end gap-2">
-                      <span className="font-semibold text-gray-800 text-base">
+                      <span className="font-semibold text-gray-800 text-sm">
                         {transaction.type === "income" ? "+" : "-"} R$ {transaction.amount.toFixed(2)}
                       </span>
-                      {transaction.type === "income" ? (
-                        <CircleArrowUp className="size-4 text-green-base" />
-                      ) : (
-                        <CircleArrowDown className="size-4 text-red-base" />
-                      )}
                     </div>
+                  </TableCell>
+
+
+                  <TableCell className="text-right pr-4">
+                    <Button variant="outline" size="icon" aria-label="Submit">
+                      <ArrowUpIcon />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -178,14 +224,8 @@ function RouteComponent() {
 
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={3} className="text-center p-4">
-                  <Link
-                    to="/transactions"
-                    className="inline-flex items-center gap-1 text-sm text-green-base hover:underline"
-                  >
-                    <Plus className="size-5" />
-                    Nova Transação
-                  </Link>
+                <TableCell colSpan={6} className="text-center p-4">
+                  Adicionar footer
                 </TableCell>
               </TableRow>
             </TableFooter>
