@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import CategoryWidgets from "@/components/categories/category-widgets"
 import PageTitle from "@/components/ui/page-title"
 
 export const Route = createFileRoute("/categories")({
@@ -16,6 +17,9 @@ function RouteComponent() {
           buttonText="Nova Categoria"
           buttonLink="/categories"
         />
+
+        {/* WIDGETS */}
+        <CategoryWidgets />
       </section>
     </main>
   )
