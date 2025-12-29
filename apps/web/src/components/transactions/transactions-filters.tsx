@@ -30,7 +30,7 @@ export default function TransactionsFilters() {
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Tipo</Label>
         <Select>
-          <SelectTrigger className="w-full !h-[46px]">
+          <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione o tipo" />
           </SelectTrigger>
           <SelectContent>
@@ -46,7 +46,7 @@ export default function TransactionsFilters() {
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Categoria</Label>
         <Select>
-          <SelectTrigger className="w-full !h-[46px]">
+          <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione a Categoria" />
           </SelectTrigger>
           <SelectContent>
@@ -65,7 +65,7 @@ export default function TransactionsFilters() {
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Período</Label>
         <Select>
-          <SelectTrigger className="w-full !h-[46px]">
+          <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione o período" />
           </SelectTrigger>
           <SelectContent>

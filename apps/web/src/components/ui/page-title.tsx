@@ -1,13 +1,13 @@
-import CreateCategoryButton from "../categories/create-category-button"
-
 interface PageTitleProps {
   title: string
   description?: string
+  children?: React.ReactNode
 }
 
 export default function PageTitle({
   title,
   description,
+  children,
 }: PageTitleProps) {
   return (
     <div className="flex gap-4 justify-between w-full items-center">
@@ -16,7 +16,7 @@ export default function PageTitle({
         <p className="text-gray-500">{description}</p>
       </div>
 
-      <CreateCategoryButton />
+      {children}
     </div>
   )
 }
