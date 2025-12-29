@@ -15,8 +15,6 @@ function RouteComponent() {
         <PageTitle
           title="Transações"
           description="Gerencie todas as suas transações financeiras"
-          buttonText="Nova Transação"
-          buttonLink="/transactions"
         />
 
         {/* FILTERS */}

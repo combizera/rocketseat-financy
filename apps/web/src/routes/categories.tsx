@@ -15,8 +15,6 @@ function RouteComponent() {
         <PageTitle
           title="Categorias"
           description="Organize suas transações por categorias"
-          buttonText="Nova Categoria"
-          buttonLink="/categories"
         />
 
         {/* WIDGETS */}
