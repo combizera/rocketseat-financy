@@ -1,5 +1,10 @@
-import { CircleArrowDown, CircleArrowUp, Plus } from "lucide-react"
-import { useState } from "react"
+import {
+  ChevronDownIcon,
+  CircleArrowDown,
+  CircleArrowUp,
+  Plus,
+} from "lucide-react"
+import React from "react"
 import {
   Dialog,
   DialogContent,
@@ -12,8 +17,10 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { categories } from "@/data/mock/categories"
 import { Button } from "../ui/button"
+import { Calendar } from "../ui/calendar"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import {
   Select,
   SelectContent,
@@ -26,6 +33,9 @@ import {
 
 export default function CreateTransactionButton() {
   // TODO: fazer lógica com useState p/ os tabs
+
+  const [open, setOpen] = React.useState(false)
+  const [date, setDate] = React.useState<Date | undefined>(undefined)
 
   return (
     <Dialog>
@@ -69,32 +79,53 @@ export default function CreateTransactionButton() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label className="text-gray-700" htmlFor="description-1">
+              <Label className="text-gray-700" htmlFor="date">
                 Data
               </Label>
-              {/* // TODO: colocar datepicker */}
-              <Input
-                placeholder="Descrição da categoria"
-                id="description-1"
-                name="description"
-              />
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger>
+                  <Button
+                    variant="outline"
+                    id="date"
+                    className="w-48 justify-between text-sm text-gray-600"
+                  >
+                    {date ? date.toLocaleDateString() : "Select date"}
+                    <ChevronDownIcon />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-auto overflow-hidden p-0"
+                  align="start"
+                >
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    captionLayout="dropdown"
+                    onSelect={(date) => {
+                      setDate(date)
+                      setOpen(false)
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="description-1">
+              <Label htmlFor="value">
                 Valor
               </Label>
-              {/* // TODO: colocar datepicker */}
               <Input
                 placeholder="Descrição da categoria"
-                id="description-1"
-                name="description"
+                id="value"
+                name="value"
               />
             </div>
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-gray-700">Categoria</Label>
+            <Label className="text-gray-700">
+              Categoria
+            </Label>
             <Select>
               <SelectTrigger className="w-full h-11.5!">
                 <SelectValue placeholder="Selecione a Categoria" />
