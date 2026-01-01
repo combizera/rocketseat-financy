@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { categories } from "@/data/mock/categories"
+import { cn } from "@/lib/utils"
+import { type TransactionType } from "@/types/transaction"
 import { Button } from "../ui/button"
 import { Calendar } from "../ui/calendar"
 import { Input } from "../ui/input"
@@ -32,7 +34,7 @@ import {
 } from "../ui/select"
 
 export default function CreateTransactionButton() {
-  // TODO: fazer lógica com useState p/ os tabs
+  const [tab, setTab] = React.useState<TransactionType>("expense")
 
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(undefined)
@@ -48,18 +50,35 @@ export default function CreateTransactionButton() {
 
       <DialogContent className="sm:max-w-106">
         <DialogHeader>
-          <DialogTitle>Despesa</DialogTitle>
-          <DialogDescription>Receita</DialogDescription>
+          <DialogTitle>
+            Nova {tab === "expense" ? "Despesa" : "Receita"}
+          </DialogTitle>
+          <DialogDescription>
+            Registre sua despesa ou receita
+          </DialogDescription>
         </DialogHeader>
 
-        <Tabs defaultValue="expense">
+        <Tabs
+          defaultValue="expense"
+          onValueChange={(value) => setTab(value as TransactionType)}
+        >
           <TabsList>
             <TabsTrigger value="expense">
-              <CircleArrowDown className="text-red-base" />
+              <CircleArrowDown
+                className={cn(
+                  "transition-colors",
+                  tab === "expense" ? "text-red-base" : "text-gray-500",
+                )}
+              />
               Despesa
             </TabsTrigger>
             <TabsTrigger value="income">
-              <CircleArrowUp className="text-green-base" />
+              <CircleArrowUp
+                className={cn(
+                  "transition-colors",
+                  tab === "income" ? "text-green-base" : "text-gray-500",
+                )}
+              />
               Receita
             </TabsTrigger>
           </TabsList>
@@ -111,9 +130,7 @@ export default function CreateTransactionButton() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="value">
-                Valor
-              </Label>
+              <Label htmlFor="value">Valor</Label>
               <Input
                 placeholder="Descrição da categoria"
                 id="value"
@@ -123,9 +140,7 @@ export default function CreateTransactionButton() {
           </div>
 
           <div className="grid gap-2">
-            <Label className="text-gray-700">
-              Categoria
-            </Label>
+            <Label className="text-gray-700">Categoria</Label>
             <Select>
               <SelectTrigger className="w-full h-11.5!">
                 <SelectValue placeholder="Selecione a Categoria" />
