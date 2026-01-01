@@ -20,7 +20,14 @@ export const Route = createFileRoute("/register")({
 
 function RouteComponent() {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col gap-10 justify-center items-center">
+
+      <img
+        alt="Logo"
+        className="w-33.5"
+        src="/images/logo.svg"
+      />
+
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="fon">Criar conta</CardTitle>
@@ -69,7 +76,7 @@ function RouteComponent() {
                 </CardDescription>
               </div>
             </div>
-            <Button type="submit" className="w-full mt-4">
+            <Button type="submit" className="w-full mt-4 text-base">
               Cadastrar
             </Button>
           </form>
@@ -82,7 +89,9 @@ function RouteComponent() {
             <Separator className="flex-1" />
           </div>
 
-          <CardDescription>Já tem uma conta?</CardDescription>
+          <CardDescription>
+            Já tem uma conta?
+          </CardDescription>
 
           <Button variant="secondary" className="w-full" asChild>
             <Link to="/">

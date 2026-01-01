@@ -20,18 +20,31 @@ export const Route = createFileRoute("/")({
 
 function LoginComponent() {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col gap-10 justify-center items-center">
+
+      <img
+        alt="Logo"
+        className="w-33.5"
+        src="/images/logo.svg"
+      />
+
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="fon">Fazer login</CardTitle>
-          <CardDescription>Entre na sua conta para continuar</CardDescription>
+          <CardTitle>
+            Fazer login
+          </CardTitle>
+          <CardDescription>
+            Entre na sua conta para continuar
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">E-mail</Label>
+                <Label htmlFor="email">
+                  E-mail
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -42,7 +55,9 @@ function LoginComponent() {
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Senha</Label>
+                  <Label htmlFor="password">
+                    Senha
+                  </Label>
                 </div>
                 <Input
                   id="password"
@@ -54,18 +69,20 @@ function LoginComponent() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2 my-2">
                     <Checkbox id="remember" />
-                    <Label htmlFor="remember">Lembrar-me</Label>
+                    <Label htmlFor="remember">
+                      Lembrar-me
+                    </Label>
                   </div>
                   <a
                     href="#"
-                    className="ml-auto font-bold hover:underline text-brand-base inline-block text-sm underline-offset-4 hover:underline"
+                    className="ml-auto font-bold text-brand-base inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Recuperar senha
                   </a>
                 </div>
               </div>
             </div>
-            <Button type="submit" className="w-full mt-4">
+            <Button type="submit" className="w-full mt-4 text-base">
               Entrar
             </Button>
           </form>
@@ -78,7 +95,9 @@ function LoginComponent() {
             <Separator className="flex-1" />
           </div>
 
-          <CardDescription>Ainda não tem uma conta?</CardDescription>
+          <CardDescription>
+            Ainda não tem uma conta?
+          </CardDescription>
 
           <Button variant="secondary" className="w-full" asChild>
             <Link to="/register" className="text-gray-500">

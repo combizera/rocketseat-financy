@@ -23,7 +23,7 @@ import { transactions } from "@/data/mock/transactions"
 
 export default function TransactionsTable() {
   return (
-    <CardCategory className="w-full rounded-none">
+    <CardCategory className="w-full rounded-md">
       <Table>
         <TableHeader>
           <TableRow>
