@@ -4,9 +4,14 @@
 
 ### Telas
 
-- [ ] Login;
-- [ ] Cadastro;
-- [ ] Dashboard;
+- [x] Login;
+- [x] Cadastro;
+- [x] Dashboard;
+- [x] Listagem de transações;
+- [x] Modal de criação/edição de transações;
+- [x] Listagem de categorias;
+- [x] Modal de criação/edição de categorias;
+- [x] Perfil do usuário;
 
 ### Autenticação
 
@@ -39,6 +44,8 @@
 ## Back-end
 
 ### Autenticação
+- [ ] Modelar BD;
+- [ ] Criar estrutura no Prisma;
 
 - [ ] O usuário pode criar uma conta
 - [ ] O usuário pode fazer login

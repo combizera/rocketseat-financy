@@ -63,10 +63,10 @@ export default function DashboardTable() {
 
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={3} className="text-center p-4">
+            <TableCell colSpan={3} className="text-center">
               <Link
                 to="/transactions"
-                className="inline-flex items-center gap-1 text-sm text-green-base hover:underline"
+                className="p-4 w-full text-center flex items-center justify-center gap-1 text-sm text-green-base hover:underline"
               >
                 <Plus className="size-5" />
                 Nova Transação
