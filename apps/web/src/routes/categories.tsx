@@ -11,7 +11,7 @@ export const Route = createFileRoute("/categories")({
 function RouteComponent() {
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 w-full">
-      <section className="flex flex-col gap-6 items-start mb-8">
+      <section className="flex flex-col gap-8 items-start mb-8">
         {/* TITLE */}
         <PageTitle
           title="Categorias"

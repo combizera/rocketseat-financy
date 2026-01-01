@@ -1,4 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 
@@ -54,9 +55,11 @@ export default function Header() {
         </nav>
 
         {/* PROFILE */}
-        <Avatar>
-          <AvatarFallback>YG</AvatarFallback>
-        </Avatar>
+        <Link to="/profile" className="transition hover:opacity-70">
+          <Avatar>
+            <AvatarFallback>YG</AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </header>
   )

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const TransactionsRoute = TransactionsRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
+  '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/transactions': typeof TransactionsRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
+  '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/transactions': typeof TransactionsRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/dashboard': typeof DashboardRoute
+  '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/transactions': typeof TransactionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/categories' | '/dashboard' | '/register' | '/transactions'
+  fullPaths:
+    | '/'
+    | '/categories'
+    | '/dashboard'
+    | '/profile'
+    | '/register'
+    | '/transactions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/categories' | '/dashboard' | '/register' | '/transactions'
+  to:
+    | '/'
+    | '/categories'
+    | '/dashboard'
+    | '/profile'
+    | '/register'
+    | '/transactions'
   id:
     | '__root__'
     | '/'
     | '/categories'
     | '/dashboard'
+    | '/profile'
     | '/register'
     | '/transactions'
   fileRoutesById: FileRoutesById
@@ -81,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CategoriesRoute: typeof CategoriesRoute
   DashboardRoute: typeof DashboardRoute
+  ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   TransactionsRoute: typeof TransactionsRoute
 }
@@ -99,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -129,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CategoriesRoute: CategoriesRoute,
   DashboardRoute: DashboardRoute,
+  ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   TransactionsRoute: TransactionsRoute,
 }

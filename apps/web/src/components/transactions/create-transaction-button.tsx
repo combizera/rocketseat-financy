@@ -81,7 +81,9 @@ export default function CreateTransactionButton() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="description-1">Valor</Label>
+              <Label htmlFor="description-1">
+                Valor
+              </Label>
               {/* // TODO: colocar datepicker */}
               <Input
                 placeholder="Descrição da categoria"
