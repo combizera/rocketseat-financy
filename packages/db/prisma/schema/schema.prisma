@@ -16,20 +16,31 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  categories   Category[]
+  transactions Transaction[]
 }
 
 model Category {
   id          String   @id @default(uuid())
+  userID      String
+  user        User     @relation(fields: [userID], references: [id], onDelete: Cascade)
   name        String
   description String?
   color       String
   icon        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  transactions Transaction[]
 }
 
 model Transaction {
   id          String   @id @default(uuid())
+  userID      String
+  user        User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+  categoryID  String
+  category    Category @relation(fields: [categoryID], references: [id], onDelete: Cascade)
   amount      Float
   type        String
   date        DateTime
