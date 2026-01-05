@@ -1,29 +1,35 @@
 import "dotenv/config"
-import fastifyCors from "@fastify/cors"
-import Fastify from "fastify"
+import { ApolloServer } from "@apollo/server"
+import { startStandaloneServer } from "@apollo/server/standalone"
 
-const baseCorsConfig = {
-  origin: process.env.CORS_ORIGIN || "",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  credentials: true,
-  maxAge: 86400,
+const typeDefs = `
+#graphql
+  type Query {
+    hello: String
+  }
+`
+
+const resolvers = {
+  Query: {
+    hello: () => "Hello from GraphQL!",
+  },
 }
 
-const fastify = Fastify({
-  logger: true,
-})
+async function startServer() {
+  const apollo = new ApolloServer({
+    typeDefs,
+    resolvers,
+    introspection: true,
+  })
 
-fastify.register(fastifyCors, baseCorsConfig)
+  const { url } = await startStandaloneServer(apollo, {
+    listen: { port: 3000 },
+  })
 
-fastify.get("/", async () => {
-  return "OK"
-})
+  console.log(`🚀 Server running at ${url}`)
+}
 
-fastify.listen({ port: 3000 }, (err) => {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-  console.log("Server running on port 3000")
+startServer().catch((err) => {
+  console.error(err)
+  process.exit(1)
 })
