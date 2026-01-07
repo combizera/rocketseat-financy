@@ -14,8 +14,8 @@ model User {
   name      String
   email     String   @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   categories   Category[]
   transactions Transaction[]
@@ -25,14 +25,14 @@ model User {
 
 model Category {
   id          String   @id @default(uuid())
-  userID      String   @map("user_id")
-  user        User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name        String
   description String?
   color       String
   icon        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   transactions Transaction[]
 
@@ -41,16 +41,16 @@ model Category {
 
 model Transaction {
   id          String   @id @default(uuid())
-  userID      String   @map("user_id")
-  user        User     @relation(fields: [userID], references: [id], onDelete: Cascade)
-  categoryID  String   @map("category_id")
-  category    Category @relation(fields: [categoryID], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String   @map("category_id")
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   amount      Float
   type        String
   date        DateTime
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("transactions")
 }
