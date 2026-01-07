@@ -1,7 +1,7 @@
 import prisma from "@financy/db"
 import type { RegisterInput } from "@/dtos/input/auth.input"
 
-export class userService {
+export class UserService {
   async createUser(data: RegisterInput) {
     const findUser = await prisma.user.findUnique({
       where: {
@@ -18,5 +18,15 @@ export class userService {
         password: data.password,
       },
     })
+  }
+
+  async findUser(id: string) {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    })
+
+    if(!user) throw new Error("User not found")
+
+    return user
   }
 }
