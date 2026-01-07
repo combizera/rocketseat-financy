@@ -1,25 +1,26 @@
-import { Field, InputType } from "type-graphql";
+import { Field, ObjectType } from "type-graphql"
+import { UserModel } from "@/models/user.model"
 
-@InputType()
+@ObjectType()
 export class LoginOutput {
+  @Field(() => UserModel)
+  user!: UserModel
+
   @Field(() => String)
-  userId!: string;
-  
+  token!: string
+
   @Field(() => String)
-  token!: string;
-  
-  @Field(() => String)
-  refreshToken!: string;
+  refreshToken!: string
 }
 
-@InputType()
+@ObjectType()
 export class RegisterOutput {
-  @Field(() => String)
-  userId!: string;
+  @Field(() => UserModel)
+  user!: UserModel
 
   @Field(() => String)
-  token!: string;
+  token!: string
 
   @Field(() => String)
-  refreshToken!: string;
+  refreshToken!: string
 }
