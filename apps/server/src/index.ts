@@ -1,25 +1,18 @@
-import "reflect-metadata";
+import "reflect-metadata"
 import "dotenv/config"
 import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from "@apollo/server/standalone"
-
-const typeDefs = `
-#graphql
-  type Query {
-    hello: String
-  }
-`
-
-const resolvers = {
-  Query: {
-    hello: () => "Hello from GraphQL!",
-  },
-}
+import { buildSchema } from "type-graphql"
+import { TestResolver } from "./resolvers/test.resolver"
 
 async function startServer() {
+  const schema = await buildSchema({
+    resolvers: [TestResolver],
+    validate: false,
+  })
+
   const apollo = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     introspection: true,
   })
 
