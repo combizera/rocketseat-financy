@@ -3,11 +3,11 @@ import "dotenv/config"
 import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from "@apollo/server/standalone"
 import { buildSchema } from "type-graphql"
-import { TestResolver } from "./resolvers/test.resolver"
+import { UserResolver } from "./resolvers/user.resolver"
 
 async function startServer() {
   const schema = await buildSchema({
-    resolvers: [TestResolver],
+    resolvers: [UserResolver],
     validate: false,
   })
 

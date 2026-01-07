@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from "type-graphql"
+import { Arg, Mutation, Query, Resolver } from "type-graphql"
 import { RegisterInput } from "@/dtos/input/auth.input"
 import { UserModel } from "@/models/user.model"
 import { userService } from "@/services/user.service"
@@ -12,5 +12,10 @@ export class UserResolver {
     @Arg('data', () => RegisterInput) data: RegisterInput
   ): Promise<UserModel>  {
     return this.userService.createUser(data)
+  }
+
+  @Query(() => String)
+  hello(): string {
+    return "Hello from TypeGraphQL!"
   }
 }

@@ -17,13 +17,15 @@
     "db:studio": "prisma studio"
   },
   "devDependencies": {
+    "@financy/config": "workspace:*",
+    "@types/better-sqlite3": "^7.6.13",
     "prisma": "^7.1.0",
-    "typescript": "catalog:",
-    "@financy/config": "workspace:*"
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "@prisma/client": "catalog:",
+    "@prisma/adapter-better-sqlite3": "^7.2.0",
     "@prisma/adapter-libsql": "^7.1.0",
+    "@prisma/client": "catalog:",
     "dotenv": "catalog:",
     "zod": "catalog:"
   }
