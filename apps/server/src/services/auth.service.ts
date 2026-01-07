@@ -1,7 +1,7 @@
 import prisma from "@financy/db"
 import type { User } from "node_modules/@financy/db/prisma/generated/client"
-import type { RegisterInput } from "@/dtos/input/auth.input"
-import { hashPassword } from "@/utils/hash"
+import type { LoginInput, RegisterInput } from "@/dtos/input/auth.input"
+import { comparePassword, hashPassword } from "@/utils/hash"
 import { signJwt } from "@/utils/jwt"
 
 export class AuthService {
@@ -25,6 +25,21 @@ export class AuthService {
     })
 
     return this.generateTokens(user)
+  }
+
+  async login(data: LoginInput) {
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: data.email,
+      }
+    })
+
+    if (!existingUser) throw new Error("Invalid credentials")
+
+    const compare = await comparePassword(data.password, existingUser.password)
+    if (!compare) throw new Error("Invalid credentials")
+
+    return this.generateTokens(existingUser)
   }
 
   generateTokens(user: User) {
