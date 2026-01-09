@@ -4,11 +4,12 @@ import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from "@apollo/server/standalone"
 import { buildSchema } from "type-graphql"
 import { AuthResolver } from "./resolvers/auth.resolver"
+import { CategoryResolver } from "./resolvers/category.resolver"
 import { UserResolver } from "./resolvers/user.resolver"
 
 async function startServer() {
   const schema = await buildSchema({
-    resolvers: [AuthResolver, UserResolver],
+    resolvers: [AuthResolver, UserResolver, CategoryResolver],
     validate: false,
   })
 

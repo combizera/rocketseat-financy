@@ -9,14 +9,14 @@ export class CategoryModel {
   @Field(() => String)
   userId!: string;
 
-  @Field(() => UserModel)
-  user!: UserModel;
+  @Field(() => UserModel, { nullable: true })
+  user?: UserModel;
 
   @Field(() => String)
   name!: string;
   
   @Field(() => String, { nullable: true })
-  description?: string;
+  description?: string | null;
 
   @Field(() => String)
   color!: string;
