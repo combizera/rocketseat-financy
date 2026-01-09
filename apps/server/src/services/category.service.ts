@@ -13,4 +13,12 @@ export class CategoryService {
       },
     })
   }
+
+  async listCategories(userId: string) {
+    return prisma.category.findMany({
+      where: {
+        userId: userId,
+      }
+    })
+  }
 }

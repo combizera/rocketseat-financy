@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver, UseMiddleware } from "type-graphql"
+import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql"
 import { CreateCategoryInput } from "@/dtos/input/category.input"
 import { GqlUser } from "@/graphql/decorator/user.decorator"
 import { IsAuth } from "@/middlewares/auth.middleware"
@@ -17,5 +17,12 @@ export class CategoryResolver {
     @GqlUser() user: UserModel,
   ): Promise<CategoryModel> {
     return this.categoryService.createCategory(data, user.id)
+  }
+
+  @Query(() => [CategoryModel])
+  async listCategories(
+    @GqlUser() user: UserModel,
+  ): Promise<CategoryModel[]> {
+    return this.categoryService.listCategories(user.id)
   }
 }
