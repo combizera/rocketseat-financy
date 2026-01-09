@@ -43,4 +43,20 @@ export class CategoryService {
       }
     })
   }
+
+  async deleteCategory(id: string) {
+    const category = await prisma.category.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!category) throw new Error("Category not found")
+
+    return prisma.category.delete({
+      where: {
+        id,
+      }
+    })
+  }
 }
