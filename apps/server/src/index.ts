@@ -3,6 +3,7 @@ import "dotenv/config"
 import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from "@apollo/server/standalone"
 import { buildSchema } from "type-graphql"
+import { buildContext } from "./graphql/context"
 import { AuthResolver } from "./resolvers/auth.resolver"
 import { CategoryResolver } from "./resolvers/category.resolver"
 import { UserResolver } from "./resolvers/user.resolver"
@@ -19,7 +20,10 @@ async function startServer() {
   })
 
   const { url } = await startStandaloneServer(apollo, {
-    listen: { port: 3000 },
+    listen: { port: 3005 },
+    context: async ({ req, res }) => {
+      return buildContext({ req, res })
+    }
   })
 
   console.log(`🚀 Server running at ${url}`)
