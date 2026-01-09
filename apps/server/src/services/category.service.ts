@@ -1,5 +1,5 @@
 import prisma from "@financy/db"
-import type { CreateCategoryInput } from "@/dtos/input/category.input"
+import type { CreateCategoryInput, UpdateCategoryInput } from "@/dtos/input/category.input"
 
 export class CategoryService {
   async createCategory(data: CreateCategoryInput, userId: string) {
@@ -18,6 +18,28 @@ export class CategoryService {
     return prisma.category.findMany({
       where: {
         userId: userId,
+      }
+    })
+  }
+
+  async updateCategory(id: string, data: UpdateCategoryInput) {
+    const category = await prisma.category.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!category) throw new Error("Category not found")
+
+    return prisma.category.update({
+      where: {
+        id,
+      }, 
+      data: {
+        name: data.name,
+        description: data.description,
+        icon: data.icon,
+        color: data.color,
       }
     })
   }
