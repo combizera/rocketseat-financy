@@ -10,18 +10,19 @@ export class TransactionModel {
   @Field(() => String)
   userId!: string
 
-  @Field(() => UserModel)
-  user!: UserModel
+  @Field(() => UserModel, { nullable: true })
+  user?: UserModel
 
   @Field(() => String)
   categoryId!: string
 
-  @Field(() => CategoryModel)
-  category!: CategoryModel
+  @Field(() => CategoryModel, { nullable: true })
+  category?: CategoryModel
 
   @Field(() => Number)
   amount!: number
 
+  // TODO: Tipar para 'income' | 'expense'
   @Field(() => String)
   type!: string
 
