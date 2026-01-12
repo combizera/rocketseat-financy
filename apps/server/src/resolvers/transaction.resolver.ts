@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql"
-import { CreateTransactionInput } from "@/dtos/input/transaction.input"
+import { CreateTransactionInput, UpdateTransactionInput } from "@/dtos/input/transaction.input"
 import { GqlUser } from "@/graphql/decorator/user.decorator"
 import { IsAuth } from "@/middlewares/auth.middleware"
 import { TransactionModel } from "@/models/transaction.model"
@@ -24,5 +24,13 @@ export class TransactionResolver {
     @GqlUser() user: UserModel,
   ): Promise<TransactionModel[]> {
     return this.transactionService.listTransactions(user.id)
+  }
+
+  @Mutation(() => TransactionModel)
+  async updateTransaction(
+    @Arg('id', () => String) id: string,
+    @Arg("data", () => UpdateTransactionInput) data: UpdateTransactionInput,
+  ): Promise<TransactionModel> {
+    return this.transactionService.updateTransaction(id, data)
   }
 }
