@@ -10,6 +10,6 @@ export class UserResolver {
   async getUser(
     @Arg('id', () => String) id: string
   ): Promise<UserModel> {
-    return this.userService.findUser(id)
+    return this.userService.getUserById(id)
   }
 }

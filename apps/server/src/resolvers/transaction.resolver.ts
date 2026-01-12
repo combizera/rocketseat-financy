@@ -15,15 +15,17 @@ import { GqlUser } from "@/graphql/decorator/user.decorator"
 import { IsAuth } from "@/middlewares/auth.middleware"
 import { CategoryModel } from "@/models/category.model"
 import { TransactionModel } from "@/models/transaction.model"
-import { type UserModel } from "@/models/user.model"
+import { UserModel } from "@/models/user.model"
 import { CategoryService } from "@/services/category.service"
 import { TransactionService } from "@/services/transaction.service"
+import { UserService } from "@/services/user.service"
 
 @Resolver(() => TransactionModel)
 @UseMiddleware(IsAuth)
 export class TransactionResolver {
   private transactionService = new TransactionService()
   private categoryService = new CategoryService()
+  private userService = new UserService()
 
   @Mutation(() => TransactionModel)
   async createTransaction(
@@ -62,5 +64,12 @@ export class TransactionResolver {
     @Root() transaction: TransactionModel,
   ): Promise<CategoryModel | null> {
     return this.categoryService.getCategoryById(transaction.categoryId)
+  }
+
+  @FieldResolver(() => UserModel, { nullable: true })
+  async user(
+    @Root() transaction: TransactionModel,
+  ): Promise<UserModel | null> {
+    return this.userService.getUserById(transaction.userId)
   }
 }

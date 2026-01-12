@@ -1,7 +1,7 @@
 import prisma from "@financy/db"
 
 export class UserService {
-  async findUser(id: string) {
+  async getUserById(id: string) {
     const user = await prisma.user.findUnique({
       where: { id },
     })
