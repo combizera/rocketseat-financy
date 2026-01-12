@@ -30,7 +30,7 @@ export class TransactionModel {
   date!: Date
 
   @Field(() => String, { nullable: true })
-  description?: string
+  description?: string | null
 
   @Field(() => GraphQLISODateTime)
   createdAt!: Date
