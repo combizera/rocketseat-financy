@@ -70,4 +70,15 @@ export class TransactionService {
       }
     })
   }
+
+  async sumTransactionAmountByCategory(categoryId: string): Promise<number> {
+    const result = await prisma.transaction.aggregate({
+      where: { categoryId },
+      _sum: {
+        amount: true,
+      }
+    })
+    
+    return result._sum.amount ?? 0  
+  }
 }

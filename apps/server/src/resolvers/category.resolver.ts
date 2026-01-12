@@ -52,4 +52,12 @@ export class CategoryResolver {
     const transactions = await this.transactionService.countTransactionsByCategory(category.id)
     return transactions
   }
+
+  @FieldResolver(() => Number)
+  async totalAmount(
+    @Root() category: CategoryModel
+  ): Promise<number> {
+    const total = await this.transactionService.sumTransactionAmountByCategory(category.id)
+    return total
+  }
 }
