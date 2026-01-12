@@ -33,4 +33,13 @@ export class TransactionResolver {
   ): Promise<TransactionModel> {
     return this.transactionService.updateTransaction(id, data)
   }
+
+  @Mutation(() => Boolean)
+  async deleteTransaction(
+    @Arg('id', () => String) id: string,
+  ): Promise<boolean> {
+    await this.transactionService.deleteTransaction(id)
+    
+    return true
+  }
 }

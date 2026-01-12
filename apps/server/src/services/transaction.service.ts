@@ -46,4 +46,20 @@ export class TransactionService {
       }
     })
   }
+
+  async deleteTransaction(id: string) {
+    const transaction = await prisma.transaction.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!transaction) throw new Error("Transaction not found")
+
+    return prisma.transaction.delete({
+      where: {
+        id,
+      }
+    })
+  }
 }
