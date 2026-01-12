@@ -1,4 +1,5 @@
 import { Field, GraphQLISODateTime, ID, ObjectType } from "type-graphql"
+import { TransactionType } from "@/enums/transaction.enum"
 import { CategoryModel } from "./category.model"
 import { UserModel } from "./user.model"
 
@@ -22,9 +23,8 @@ export class TransactionModel {
   @Field(() => Number)
   amount!: number
 
-  // TODO: Tipar para 'income' | 'expense'
-  @Field(() => String)
-  type!: string
+  @Field(() => TransactionType)
+  type!: TransactionType
 
   @Field(() => GraphQLISODateTime)
   date!: Date

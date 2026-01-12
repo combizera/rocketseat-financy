@@ -1,4 +1,5 @@
 import { Field, GraphQLISODateTime, InputType } from "type-graphql"
+import { TransactionType } from "@/enums/transaction.enum"
 
 @InputType()
 export class CreateTransactionInput {
@@ -8,8 +9,8 @@ export class CreateTransactionInput {
   @Field(() => Number)
   amount!: number
 
-  @Field(() => String)
-  type!: string
+  @Field(() => TransactionType)
+  type!: TransactionType
 
   @Field(() => GraphQLISODateTime)
   date!: Date
@@ -26,8 +27,8 @@ export class UpdateTransactionInput {
   @Field(() => Number, { nullable: true })
   amount?: number
 
-  @Field(() => String, { nullable: true })
-  type?: string
+  @Field(() => TransactionType, { nullable: true })
+  type?: TransactionType
 
   @Field(() => GraphQLISODateTime, { nullable: true })
   date?: Date

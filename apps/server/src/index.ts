@@ -9,6 +9,8 @@ import { CategoryResolver } from "./resolvers/category.resolver"
 import { TransactionResolver } from "./resolvers/transaction.resolver"
 import { UserResolver } from "./resolvers/user.resolver"
 
+import "./enums/transaction.enum"
+
 async function startServer() {
   const schema = await buildSchema({
     resolvers: [
@@ -18,6 +20,7 @@ async function startServer() {
       TransactionResolver,
     ],
     validate: false,
+    emitSchemaFile: "./schema.graphql",
   })
 
   const apollo = new ApolloServer({
