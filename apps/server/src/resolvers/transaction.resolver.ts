@@ -1,15 +1,29 @@
-import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql"
-import { CreateTransactionInput, UpdateTransactionInput } from "@/dtos/input/transaction.input"
+import {
+  Arg,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+  Root,
+  UseMiddleware,
+} from "type-graphql"
+import {
+  CreateTransactionInput,
+  UpdateTransactionInput,
+} from "@/dtos/input/transaction.input"
 import { GqlUser } from "@/graphql/decorator/user.decorator"
 import { IsAuth } from "@/middlewares/auth.middleware"
+import { CategoryModel } from "@/models/category.model"
 import { TransactionModel } from "@/models/transaction.model"
-import type { UserModel } from "@/models/user.model"
+import { type UserModel } from "@/models/user.model"
+import { CategoryService } from "@/services/category.service"
 import { TransactionService } from "@/services/transaction.service"
 
 @Resolver(() => TransactionModel)
 @UseMiddleware(IsAuth)
 export class TransactionResolver {
   private transactionService = new TransactionService()
+  private categoryService = new CategoryService()
 
   @Mutation(() => TransactionModel)
   async createTransaction(
@@ -28,7 +42,7 @@ export class TransactionResolver {
 
   @Mutation(() => TransactionModel)
   async updateTransaction(
-    @Arg('id', () => String) id: string,
+    @Arg("id", () => String) id: string,
     @Arg("data", () => UpdateTransactionInput) data: UpdateTransactionInput,
   ): Promise<TransactionModel> {
     return this.transactionService.updateTransaction(id, data)
@@ -36,10 +50,17 @@ export class TransactionResolver {
 
   @Mutation(() => Boolean)
   async deleteTransaction(
-    @Arg('id', () => String) id: string,
+    @Arg("id", () => String) id: string,
   ): Promise<boolean> {
     await this.transactionService.deleteTransaction(id)
-    
+
     return true
+  }
+
+  @FieldResolver(() => CategoryModel, { nullable: true })
+  async category(
+    @Root() transaction: TransactionModel,
+  ): Promise<CategoryModel | null> {
+    return this.categoryService.getCategoryById(transaction.categoryId)
   }
 }

@@ -14,6 +14,14 @@ export class CategoryService {
     })
   }
 
+  async getCategoryById(id: string) {
+    return prisma.category.findUnique({
+      where: { 
+        id
+      },
+    })
+  }
+
   async listCategories(userId: string) {
     return prisma.category.findMany({
       where: {
