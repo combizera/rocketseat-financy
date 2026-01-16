@@ -11,6 +11,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^4.1.0",
     "@base-ui/react": "^1.0.0",
     "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "catalog:",
@@ -33,7 +34,8 @@
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.2.5",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@tanstack/react-router-devtools": "^1.141.1",
