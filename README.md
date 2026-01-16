@@ -44,23 +44,23 @@
 ## Back-end
 
 ### Autenticação
-- [ ] Modelar BD;
-- [ ] Criar estrutura no Prisma;
+- [x] Modelar BD;
+- [x] Criar estrutura no Prisma;
 
-- [ ] O usuário pode criar uma conta
-- [ ] O usuário pode fazer login
-- [ ] O usuário pode ver e gerenciar apenas suas próprias transações e categorias
+- [x] O usuário pode criar uma conta
+- [x] O usuário pode fazer login
+- [x] O usuário pode ver e gerenciar apenas suas próprias transações e categorias
 
 ### Transações
 
-- [ ] Deve ser possível criar uma transação
-- [ ] Deve ser possível deletar uma transação
-- [ ] Deve ser possível editar uma transação
-- [ ] Deve ser possível listar todas as transações
+- [x] Deve ser possível criar uma transação
+- [x] Deve ser possível deletar uma transação
+- [x] Deve ser possível editar uma transação
+- [x] Deve ser possível listar todas as transações
 
 ### Categorias
 
-- [ ] Deve ser possível criar uma categoria
-- [ ] Deve ser possível deletar uma categoria
-- [ ] Deve ser possível editar uma categoria
-- [ ] Deve ser possível listar todas as categorias
+- [x] Deve ser possível criar uma categoria
+- [x] Deve ser possível deletar uma categoria
+- [x] Deve ser possível editar uma categoria
+- [x] Deve ser possível listar todas as categorias
