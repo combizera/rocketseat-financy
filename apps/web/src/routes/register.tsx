@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
 
 import { Lock, LogIn, Mail, UserRound } from "lucide-react"
 import { useState } from "react"
@@ -28,6 +28,7 @@ function RouteComponent() {
   const [loading, setLoading] = useState(false)
 
   const signup = useAuthStore((state) => state.signup)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,8 +43,7 @@ function RouteComponent() {
 
       if (signupMutate) {
         toast.success("Conta criada com sucesso!")
-
-        console.log("Signup mutation result:", signupMutate)
+        navigate({ to: "/dashboard" })
       }
     } catch (error: unknown) {
       toast.error("Erro ao realizar o cadastro")

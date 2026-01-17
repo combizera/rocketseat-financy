@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
 import { Lock, Mail, UserRoundPlus } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -27,6 +27,7 @@ function LoginComponent() {
   const [loading, setLoading] = useState(false)
 
   const login = useAuthStore((state) => state.login)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,6 +42,9 @@ function LoginComponent() {
       if (!loginMutate) {
         alert("Invalid email or password.")
       }
+
+      toast.success("Logged in successfully!")
+      navigate({ to: "/dashboard" })
     } catch (error: unknown) {
       toast.error("Error logging in")
       console.error("Login error:", error)
