@@ -4,7 +4,7 @@ import TransactionsFilters from "@/components/transactions/transactions-filters"
 import TransactionsTable from "@/components/transactions/transactions-table"
 import PageTitle from "@/components/ui/page-title"
 
-export const Route = createFileRoute("/transactions")({
+export const Route = createFileRoute("/_authenticated/transactions")({
   component: RouteComponent,
 })
 
