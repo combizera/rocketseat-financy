@@ -29,7 +29,7 @@ export default function Header() {
     <header className="px-4 py-3 border-b border-border bg-white">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* LOGO */}
-        <Link to="/" className="text-xl font-bold">
+        <Link to="/" className="text-xl font-bold hover:opacity-70 transition">
           <img src="/images/logo.svg" alt="Logo" />
         </Link>
 
