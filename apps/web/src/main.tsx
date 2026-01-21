@@ -1,7 +1,9 @@
+import { ApolloProvider } from "@apollo/client/react"
 import { createRouter, RouterProvider } from "@tanstack/react-router"
 import ReactDOM from "react-dom/client"
 
 import Loader from "./components/loader"
+import { apolloClient } from "./lib/apollo"
 import { routeTree } from "./routeTree.gen"
 
 const router = createRouter({
@@ -25,5 +27,9 @@ if (!rootElement) {
 
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
-  root.render(<RouterProvider router={router} />)
+  root.render(
+    <ApolloProvider client={apolloClient}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
+  )
 }
