@@ -4,12 +4,32 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client"
+import { SetContextLink } from "@apollo/client/link/context"
+import { useAuthStore } from "@/stores/auth"
 
 const httpLink = new HttpLink({
   uri: `${import.meta.env.VITE_GQL_SERVER_URL}/graphql`,
 })
 
+const authLink = new SetContextLink((operation, prevContext) => {
+  const state = useAuthStore.getState()
+  const token = state.token
+
+  if (!token) {
+    console.warn("Nenhum token encontrado no auth store")
+  } else {
+    console.log("Token presente, enviando requisição autenticada")
+  }
+
+  return {
+    headers: {
+      ...Headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  }
+})
+
 export const apolloClient = new ApolloClient({
-  link: ApolloLink.from([httpLink]),
+  link: ApolloLink.from([authLink, httpLink]),
   cache: new InMemoryCache(),
 })
