@@ -62,11 +62,13 @@ export default function CreateCategoryButton() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button size="sm" className="px-4 text-sm font-semibold">
-          <Plus className="size-5" />
-          Nova Categoria
-        </Button>
+      <DialogTrigger
+        render={
+          <Button size="sm" className="px-4 text-sm font-semibold" />
+        }
+      >
+        <Plus className="size-5" />
+        Nova Categoria
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-106">

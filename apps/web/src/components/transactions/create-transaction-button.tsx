@@ -41,11 +41,13 @@ export default function CreateTransactionButton() {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button size="sm" className="px-4 text-sm font-semibold">
-          <Plus className="size-5" />
-          Nova Transação
-        </Button>
+      <DialogTrigger
+        render={
+          <Button size="sm" className="px-4 text-sm font-semibold" />
+        }
+      >
+        <Plus className="size-5" />
+        Nova Transação
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-106">
@@ -102,15 +104,17 @@ export default function CreateTransactionButton() {
                 Data
               </Label>
               <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger>
-                  <Button
-                    variant="outline"
-                    id="date"
-                    className="w-48 justify-between text-sm text-gray-600"
-                  >
-                    {date ? date.toLocaleDateString() : "Select date"}
-                    <ChevronDownIcon />
-                  </Button>
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant="outline"
+                      id="date"
+                      className="w-48 justify-between text-sm text-gray-600"
+                    />
+                  }
+                >
+                  {date ? date.toLocaleDateString() : "Select date"}
+                  <ChevronDownIcon />
                 </PopoverTrigger>
                 <PopoverContent
                   className="w-auto overflow-hidden p-0"
