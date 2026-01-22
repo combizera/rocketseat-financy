@@ -11,19 +11,13 @@ const httpLink = new HttpLink({
   uri: `${import.meta.env.VITE_GQL_SERVER_URL}/graphql`,
 })
 
-const authLink = new SetContextLink((operation, prevContext) => {
+const authLink = new SetContextLink((_, prevContext) => {
   const state = useAuthStore.getState()
   const token = state.token
 
-  if (!token) {
-    console.warn("Nenhum token encontrado no auth store")
-  } else {
-    console.log("Token presente, enviando requisição autenticada")
-  }
-
   return {
     headers: {
-      ...Headers,
+      ...prevContext.headers,
       authorization: token ? `Bearer ${token}` : "",
     },
   }
