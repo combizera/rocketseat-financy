@@ -1,19 +1,20 @@
 import { useQuery } from "@apollo/client/react"
+import type { LucideIcon } from "lucide-react"
 import { useState } from "react"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
 import { getIconComponent } from "@/lib/icon-map"
-import { type Category, type CategoryAPI } from "@/types/category"
-import { type BadgeColor } from "../ui/badge"
+import type { Category } from "@/types/category"
+import type { BadgeColor } from "../ui/badge"
 import CardCategoryItem from "../ui/card-category-item"
-import EditCategoryDialog from "./edit-category-dialog"
 import DeleteCategoryDialog from "./delete-category-dialog"
+import EditCategoryDialog from "./edit-category-dialog"
 
 type ListCategoriesData = {
-  listCategories: CategoryAPI[]
+  listCategories: Category[]
 }
 
 type CategoryWithIconName = Category & {
-  iconName: string
+  iconComponent: LucideIcon
 }
 
 export default function CategoryCards() {
@@ -45,14 +46,8 @@ export default function CategoryCards() {
   const categories: CategoryWithIconName[] = (data?.listCategories || []).map((category) => {
     const IconComponent = getIconComponent(category.icon)
     return {
-      id: category.id,
-      name: category.name,
-      description: category.description,
-      color: category.color as BadgeColor,
-      icon: IconComponent,
-      iconName: category.icon,
-      itemsCount: category.transactionsCount || 0,
-      totalAmount: category.totalAmount,
+      ...category,
+      iconComponent: IconComponent,
     }
   })
 
@@ -94,9 +89,9 @@ export default function CategoryCards() {
             id={category.id}
             name={category.name}
             description={category.description}
-            color={category.color}
-            itemsCount={category.itemsCount}
-            icon={category.icon}
+            color={category.color as BadgeColor}
+            itemsCount={category.transactionsCount || 0}
+            icon={category.iconComponent}
             onEdit={handleEdit}
             onDelete={handleDelete}
           />
