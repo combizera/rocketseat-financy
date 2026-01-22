@@ -13,12 +13,19 @@ type ListCategoriesData = {
   listCategories: Category[]
 }
 
-type CategoryWithIconName = Category & {
+type CategoryWithIcon = {
+  id: string
+  name: string
+  description?: string
+  color: string
+  icon: string
   iconComponent: LucideIcon
+  transactionsCount?: number
+  totalAmount?: number
 }
 
 export default function CategoryCards() {
-  const [editingCategory, setEditingCategory] = useState<CategoryWithIconName | null>(null)
+  const [editingCategory, setEditingCategory] = useState<CategoryWithIcon | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [deletingCategory, setDeletingCategory] = useState<Pick<Category, "id" | "name"> | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -43,7 +50,7 @@ export default function CategoryCards() {
     )
   }
 
-  const categories: CategoryWithIconName[] = (data?.listCategories || []).map((category) => {
+  const categories: CategoryWithIcon[] = (data?.listCategories || []).map((category) => {
     const IconComponent = getIconComponent(category.icon)
     return {
       ...category,

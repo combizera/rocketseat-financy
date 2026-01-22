@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client/react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 import {
   Dialog,
@@ -9,73 +9,40 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { UPDATE_CATEGORY } from "@/lib/graphql/mutations/Category"
+import { colorMap, colors } from "@/lib/constants/colors"
+import { CREATE_CATEGORY } from "@/lib/graphql/mutations/Category"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import { categoryIconNames, categoryIcons } from "@/lib/icon-map"
 import { cn } from "@/lib/utils"
-import type { Category } from "@/types/category"
 import type { BadgeColor } from "@/types/badge"
-import { colors, colorMap } from "@/lib/constants/colors"
-import {
-  categoryIcons,
-  categoryIconNames,
-} from "@/lib/icon-map"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
-type CategoryWithIcon = {
-  id: string
-  name: string
-  description?: string
-  color: string
-  icon: string
-  transactionsCount?: number
-  totalAmount?: number
-}
-
-type EditCategoryDialogProps = {
-  category: CategoryWithIcon | null
+interface CreateCategoryDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-export default function EditCategoryDialog({
-  category,
+export default function CreateCategoryDialog({
   open,
   onOpenChange,
-}: EditCategoryDialogProps) {
+}: CreateCategoryDialogProps) {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [selectedIcon, setSelectedIcon] = useState(0)
   const [selectedColor, setSelectedColor] = useState<BadgeColor>("green")
 
-  const [updateCategory, { loading }] = useMutation(UPDATE_CATEGORY, {
+  const [createCategory, { loading }] = useMutation(CREATE_CATEGORY, {
     refetchQueries: [{ query: LIST_CATEGORIES }],
   })
-
-  useEffect(() => {
-    if (category) {
-      setName(category.name)
-      setDescription(category.description || "")
-      setSelectedColor(category.color as BadgeColor)
-
-      // Encontrar o índice do ícone baseado no nome armazenado
-      const iconIndex = categoryIconNames.findIndex(
-        (iconName) => iconName === category.icon,
-      )
-      setSelectedIcon(iconIndex !== -1 ? iconIndex : 0)
-    }
-  }, [category])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!category) return
-
     try {
-      await updateCategory({
+      await createCategory({
         variables: {
-          categoryId: category.id,
           data: {
             name,
             description: description || undefined,
@@ -85,11 +52,17 @@ export default function EditCategoryDialog({
         },
       })
 
-      toast.success("Categoria atualizada com sucesso!")
+      toast.success("Categoria criada com sucesso!")
       onOpenChange(false)
+
+      // Reset form
+      setName("")
+      setDescription("")
+      setSelectedIcon(0)
+      setSelectedColor("green")
     } catch (error) {
-      console.error("Erro ao atualizar categoria:", error)
-      toast.error("Erro ao atualizar categoria")
+      console.error("Erro ao criar categoria:", error)
+      toast.error("Erro ao criar categoria")
     }
   }
 
@@ -97,9 +70,9 @@ export default function EditCategoryDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-106">
         <DialogHeader>
-          <DialogTitle>Editar Categoria</DialogTitle>
+          <DialogTitle>Nova Categoria</DialogTitle>
           <DialogDescription>
-            Atualize as informações da categoria
+            Organize suas transações com categorias
           </DialogDescription>
         </DialogHeader>
 
@@ -136,8 +109,7 @@ export default function EditCategoryDialog({
                     key={index}
                     className={cn(
                       "p-2 rounded border border-gray-300 cursor-pointer hover:border-green-base",
-                      selectedIcon === index &&
-                      "border-green-base bg-green-light",
+                      selectedIcon === index && "border-green-base bg-green-light",
                     )}
                   >
                     <input
@@ -191,7 +163,7 @@ export default function EditCategoryDialog({
               type="submit"
               disabled={loading}
             >
-              {loading ? "Salvando..." : "Salvar Alterações"}
+              {loading ? "Salvando..." : "Salvar"}
             </Button>
           </DialogFooter>
         </form>
