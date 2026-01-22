@@ -7,6 +7,7 @@ import {
   SquarePen,
   Trash,
 } from "lucide-react"
+import { useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -22,15 +23,41 @@ import {
 } from "@/components/ui/table"
 import { LIST_TRANSACTION } from "@/lib/graphql/querys/Transaction"
 import { getIconComponent } from "@/lib/icon-map"
-import { type BadgeColor } from "@/types/badge"
-import { type Transaction } from "@/types/transaction"
+import type { BadgeColor } from "@/types/badge"
+import type { Transaction } from "@/types/transaction"
+import DeleteTransactionDialog from "./delete-transaction-dialog"
+import EditTransactionDialog from "./edit-transaction-dialog"
 
 interface TransactionsData {
   listTransactions: Transaction[]
 }
 
 export default function TransactionsTable() {
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [deletingTransaction, setDeletingTransaction] = useState<Pick<Transaction, "id" | "description"> | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+
   const { data, loading, error } = useQuery<TransactionsData>(LIST_TRANSACTION)
+
+  const handleEdit = (id: string) => {
+    const transactionToEdit = data?.listTransactions.find((t) => t.id === id)
+    if (transactionToEdit) {
+      setEditingTransaction(transactionToEdit)
+      setIsEditDialogOpen(true)
+    }
+  }
+
+  const handleDelete = (id: string) => {
+    const transactionToDelete = data?.listTransactions.find((t) => t.id === id)
+    if (transactionToDelete) {
+      setDeletingTransaction({
+        id: transactionToDelete.id,
+        description: transactionToDelete.description,
+      })
+      setIsDeleteDialogOpen(true)
+    }
+  }
 
   if (loading) {
     return (
@@ -63,8 +90,9 @@ export default function TransactionsTable() {
   }
 
   return (
-    <CardCategory className="w-full rounded-md">
-      <Table>
+    <>
+      <CardCategory className="w-full rounded-md">
+        <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="text-left pl-4 max-w-87">
@@ -141,6 +169,7 @@ export default function TransactionsTable() {
                     size="icon"
                     aria-label="Deletar transação"
                     className="py-3 px-3"
+                    onClick={() => handleDelete(transaction.id)}
                   >
                     <Trash className="text-[#EF4444]" />
                   </Button>
@@ -150,6 +179,7 @@ export default function TransactionsTable() {
                     size="icon"
                     aria-label="Editar transação"
                     className="py-3 px-3"
+                    onClick={() => handleEdit(transaction.id)}
                   >
                     <SquarePen />
                   </Button>
@@ -198,5 +228,18 @@ export default function TransactionsTable() {
         </TableFooter>
       </Table>
     </CardCategory>
+
+    <EditTransactionDialog
+      transaction={editingTransaction}
+      open={isEditDialogOpen}
+      onOpenChange={setIsEditDialogOpen}
+    />
+
+    <DeleteTransactionDialog
+      transaction={deletingTransaction}
+      open={isDeleteDialogOpen}
+      onOpenChange={setIsDeleteDialogOpen}
+    />
+  </>
   )
 }
