@@ -11,13 +11,13 @@ const httpLink = new HttpLink({
   uri: `${import.meta.env.VITE_GQL_SERVER_URL}/graphql`,
 })
 
-const authLink = new SetContextLink((_, prevContext) => {
+const authLink = new SetContextLink((_, prevContext: Record<string, unknown>) => {
   const state = useAuthStore.getState()
   const token = state.token
 
   return {
     headers: {
-      ...prevContext.headers,
+      ...(prevContext && typeof prevContext.headers === "object" ? prevContext.headers as Record<string, string> : {}),
       authorization: token ? `Bearer ${token}` : "",
     },
   }

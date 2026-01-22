@@ -24,6 +24,7 @@ type LoginMutationData = {
 interface AuthState {
   user: User | null
   token: string | null
+  refreshToken: string | null
   isAuthenticated: boolean
   signup: (data: RegisterInput) => Promise<boolean>
   login: (data: LoginInput) => Promise<boolean>
@@ -35,6 +36,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       token: null,
+      refreshToken: null,
       isAuthenticated: false,
 
       signup: async (registerData: RegisterInput) => {
@@ -54,7 +56,7 @@ export const useAuthStore = create<AuthState>()(
           })
 
           if (data?.register) {
-            const { user, token } = data.register
+            const { user, token, refreshToken } = data.register
 
             set({
               user: {
@@ -66,6 +68,7 @@ export const useAuthStore = create<AuthState>()(
                 updatedAt: user.updatedAt,
               },
               token,
+              refreshToken,
               isAuthenticated: true,
             })
 
@@ -94,7 +97,7 @@ export const useAuthStore = create<AuthState>()(
           })
 
           if (data?.login) {
-            const { user, token } = data.login
+            const { user, token, refreshToken } = data.login
 
             set({
               user: {
@@ -106,6 +109,7 @@ export const useAuthStore = create<AuthState>()(
                 updatedAt: user.updatedAt,
               },
               token,
+              refreshToken,
               isAuthenticated: true,
             })
 
@@ -122,6 +126,7 @@ export const useAuthStore = create<AuthState>()(
         set({
           user: null,
           token: null,
+          refreshToken: null,
           isAuthenticated: false,
         })
       },
