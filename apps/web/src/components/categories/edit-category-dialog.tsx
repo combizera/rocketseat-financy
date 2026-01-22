@@ -9,32 +9,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { colorMap, colors } from "@/lib/constants/colors"
 import { UPDATE_CATEGORY } from "@/lib/graphql/mutations/Category"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import { categoryIconNames, categoryIcons } from "@/lib/icon-map"
 import { cn } from "@/lib/utils"
-import type { Category } from "@/types/category"
 import type { BadgeColor } from "@/types/badge"
-import { colors, colorMap } from "@/lib/constants/colors"
-import {
-  categoryIcons,
-  categoryIconNames,
-} from "@/lib/icon-map"
+import type { Category } from "@/types/category"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
-type CategoryWithIcon = {
-  id: string
-  name: string
-  description?: string
-  color: string
-  icon: string
-  transactionsCount?: number
-  totalAmount?: number
-}
-
 type EditCategoryDialogProps = {
-  category: CategoryWithIcon | null
+  category: Category | null
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -59,7 +46,6 @@ export default function EditCategoryDialog({
       setDescription(category.description || "")
       setSelectedColor(category.color as BadgeColor)
 
-      // Encontrar o índice do ícone baseado no nome armazenado
       const iconIndex = categoryIconNames.findIndex(
         (iconName) => iconName === category.icon,
       )

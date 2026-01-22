@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/client/react"
-import type { LucideIcon } from "lucide-react"
 import { useState } from "react"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
 import { getIconComponent } from "@/lib/icon-map"
-import type { Category } from "@/types/category"
+import type { Category, CategoryWithIconComponent } from "@/types/category"
 import type { BadgeColor } from "../ui/badge"
 import CardCategoryItem from "../ui/card-category-item"
 import DeleteCategoryDialog from "./delete-category-dialog"
@@ -13,19 +12,8 @@ type ListCategoriesData = {
   listCategories: Category[]
 }
 
-type CategoryWithIcon = {
-  id: string
-  name: string
-  description?: string
-  color: string
-  icon: string
-  iconComponent: LucideIcon
-  transactionsCount?: number
-  totalAmount?: number
-}
-
 export default function CategoryCards() {
-  const [editingCategory, setEditingCategory] = useState<CategoryWithIcon | null>(null)
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [deletingCategory, setDeletingCategory] = useState<Pick<Category, "id" | "name"> | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -50,7 +38,7 @@ export default function CategoryCards() {
     )
   }
 
-  const categories: CategoryWithIcon[] = (data?.listCategories || []).map((category) => {
+  const categories: CategoryWithIconComponent[] = (data?.listCategories || []).map((category) => {
     const IconComponent = getIconComponent(category.icon)
     return {
       ...category,
@@ -59,7 +47,7 @@ export default function CategoryCards() {
   })
 
   const handleEdit = (id: string) => {
-    const categoryToEdit = categories.find((cat) => cat.id === id)
+    const categoryToEdit = data?.listCategories.find((cat) => cat.id === id)
     if (categoryToEdit) {
       setEditingCategory(categoryToEdit)
       setIsEditDialogOpen(true)
