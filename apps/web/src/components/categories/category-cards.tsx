@@ -6,6 +6,7 @@ import { type Category, type CategoryAPI } from "@/types/category"
 import { type BadgeColor } from "../ui/badge"
 import CardCategoryItem from "../ui/card-category-item"
 import EditCategoryDialog from "./edit-category-dialog"
+import DeleteCategoryDialog from "./delete-category-dialog"
 
 type ListCategoriesData = {
   listCategories: CategoryAPI[]
@@ -18,6 +19,8 @@ type CategoryWithIconName = Category & {
 export default function CategoryCards() {
   const [editingCategory, setEditingCategory] = useState<CategoryWithIconName | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [deletingCategory, setDeletingCategory] = useState<Pick<Category, "id" | "name"> | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   const { data, loading, error } = useQuery<ListCategoriesData>(LIST_CATEGORIES)
 
@@ -61,6 +64,17 @@ export default function CategoryCards() {
     }
   }
 
+  const handleDelete = (id: string) => {
+    const categoryToDelete = categories.find((category) => category.id === id)
+    if (categoryToDelete) {
+      setDeletingCategory({
+        id: categoryToDelete.id,
+        name: categoryToDelete.name,
+      })
+      setIsDeleteDialogOpen(true)
+    }
+  }
+
   if (categories.length === 0) {
     return (
       <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
@@ -84,6 +98,7 @@ export default function CategoryCards() {
             itemsCount={category.itemsCount}
             icon={category.icon}
             onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         ))}
       </section>
@@ -92,6 +107,12 @@ export default function CategoryCards() {
         category={editingCategory}
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
+      />
+
+      <DeleteCategoryDialog
+        category={deletingCategory}
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
       />
     </>
   )
