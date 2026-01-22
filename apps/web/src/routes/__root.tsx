@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 
 import "../index.css"
+import { useAuthStore } from "@/stores/auth"
 
 export interface RouterAppContext { }
 
@@ -35,6 +36,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 })
 
 function RootComponent() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
   return (
     <>
       <HeadContent />
@@ -44,7 +46,7 @@ function RootComponent() {
         storageKey="vite-ui-theme"
       >
         <div className="grid grid-rows-[auto_1fr] min-h-svh bg-gray-100">
-          <Header />
+          {isAuthenticated && <Header />}
           <Outlet />
         </div>
         <Toaster richColors />
