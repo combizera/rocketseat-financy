@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { useAuthStore } from "@/stores/auth"
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_guest/")({
   component: LoginComponent,
 })
 
