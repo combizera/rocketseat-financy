@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client/react"
 import { Search } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -11,9 +12,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { categories } from "@/data/mock/categories"
+import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import type { Category } from "@/types/category"
+
+interface CategoriesData {
+  listCategories: Category[]
+}
 
 export default function TransactionsFilters() {
+  const { data } = useQuery<CategoriesData>(LIST_CATEGORIES)
+  const categories = data?.listCategories || []
   return (
     <Card className="w-full grid grid-cols-4 gap-4 p-6">
       <div className="flex flex-col gap-2">
