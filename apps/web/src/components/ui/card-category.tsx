@@ -19,7 +19,7 @@ export function CardCategory({
   className,
 }: CardCategoryProps) {
   return (
-    <Card className={cn(`flex flex-col gap-4 p-0`, className)}>
+    <Card className={cn(`flex flex-col p-0 gap-2`, className)}>
       {(title || buttonText) && (
         <div className="flex justify-between border-b py-4 px-6">
           {title && <p className="text-gray-500 uppercase mt-1">{title}</p>}
@@ -34,7 +34,7 @@ export function CardCategory({
           )}
         </div>
       )}
-      <div className="pt-2 pb-1">
+      <div>
         {children}
       </div>
     </Card>
