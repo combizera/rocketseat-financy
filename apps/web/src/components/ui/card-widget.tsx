@@ -19,7 +19,7 @@ export function CardWidget({
   return (
     variant === "compact" ? (
       <Card className="flex flex-row gap-4 p-6 pb-4">
-        <Icon className={`mt-1 size-[20px] ${iconClass}`} />
+        <Icon className={`mt-1 size-5 ${iconClass}`} />
         <div className="flex flex-col gap-1">
           <h2 className="text-gray-800 leading-[100%] font-bold text-[28px]">{title}</h2>
           <p className="text-gray-500 uppercase">{subtitle}</p>
@@ -28,7 +28,7 @@ export function CardWidget({
     ) : (
       <Card className="flex flex-col gap-2 p-6 pb-4">
         <div className="flex gap-2 items-center">
-          <Icon className={`size-[20px] ${iconClass}`} />
+          <Icon className={`size-5 ${iconClass}`} />
           <p className="text-gray-500 uppercase">{subtitle}</p>
         </div>
         <h2 className="text-gray-800 font-bold text-[28px]">{title}</h2>
