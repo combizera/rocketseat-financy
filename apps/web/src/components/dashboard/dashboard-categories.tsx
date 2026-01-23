@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client/react"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import { formatCurrency } from "@/lib/utils"
 import { type Category } from "@/types/category"
 import { Badge, type BadgeColor } from "../ui/badge"
 import { CardCategory } from "../ui/card-category"
@@ -47,7 +48,7 @@ export default function DashboardCategories() {
                   {category.transactionsCount || 0} transações
                 </TableCell>
                 <TableCell className="text-right font-semibold text-gray-800 pr-4">
-                  R$ {category.totalAmount?.toFixed(2) || "0.00"}
+                  {formatCurrency(category.totalAmount || 0)}
                 </TableCell>
               </TableRow>
             ))

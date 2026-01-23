@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table"
 import { LIST_TRANSACTION } from "@/lib/graphql/querys/Transaction"
 import { getIconComponent } from "@/lib/icon-map"
+import { formatCurrency } from "@/lib/utils"
 import type { BadgeColor } from "@/types/badge"
 import type { Transaction } from "@/types/transaction"
 import DeleteTransactionDialog from "./delete-transaction-dialog"
@@ -157,8 +158,8 @@ export default function TransactionsTable() {
                 <TableCell>
                   <div className="flex items-center justify-end gap-2">
                     <span className="font-semibold text-gray-800 text-sm">
-                      {transaction.type === "INCOME" ? "+" : "-"} R${" "}
-                      {transaction.amount.toFixed(2)}
+                      {transaction.type === "INCOME" ? "+" : "-"}{" "}
+                      {formatCurrency(transaction.amount)}
                     </span>
                   </div>
                 </TableCell>

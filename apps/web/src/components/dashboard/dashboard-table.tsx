@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table"
 import { LIST_TRANSACTION } from "@/lib/graphql/querys/Transaction"
 import { getIconComponent } from "@/lib/icon-map"
+import { formatCurrency } from "@/lib/utils"
 import { type BadgeColor } from "@/types/badge"
 import { type Transaction } from "@/types/transaction"
 import { CardCategory } from "../ui/card-category"
@@ -78,8 +79,8 @@ export default function DashboardTable() {
                   <TableCell className="text-right pr-4">
                     <div className="flex items-center justify-end gap-2">
                       <span className="font-semibold text-gray-800 text-base">
-                        {transaction.type === "INCOME" ? "+" : "-"} R${" "}
-                        {transaction.amount.toFixed(2)}
+                        {transaction.type === "INCOME" ? "+" : "-"}{" "}
+                        {formatCurrency(transaction.amount)}
                       </span>
                       {transaction.type === "INCOME" ? (
                         <CircleArrowUp className="size-4 text-green-base" />
