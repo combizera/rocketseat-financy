@@ -1,7 +1,8 @@
 import { Link, useLocation } from "@tanstack/react-router"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { cn } from "@/lib/utils"
+import { cn, getInitials } from "@/lib/utils"
+import { useAuthStore } from "@/stores/auth"
 
 interface MenuProps {
   to: string
@@ -9,6 +10,7 @@ interface MenuProps {
 }
 
 export default function Header() {
+  const user = useAuthStore((state) => state.user)
   const location = useLocation({ select: (loc) => loc.pathname })
   const links: MenuProps[] = [
     {
@@ -57,7 +59,9 @@ export default function Header() {
         {/* PROFILE */}
         <Link to="/profile" className="transition hover:opacity-70">
           <Avatar>
-            <AvatarFallback>YG</AvatarFallback>
+            <AvatarFallback>
+              {user?.name ? getInitials(user.name) : "??"}
+            </AvatarFallback>
           </Avatar>
         </Link>
       </div>

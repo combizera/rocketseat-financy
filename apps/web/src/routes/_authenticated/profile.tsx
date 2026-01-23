@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { getInitials } from "@/lib/utils"
 import { useAuthStore } from "@/stores/auth"
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -28,14 +29,6 @@ function RouteComponent() {
     navigate({ to: "/" })
   }
 
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2)
-  }
   return (
     <div className="flex justify-center items-center">
       <Card className="w-full max-w-md">
