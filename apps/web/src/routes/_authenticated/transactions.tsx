@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import { useState } from "react"
 import CreateTransactionButton from "@/components/transactions/create-transaction-button"
 import TransactionsFilters from "@/components/transactions/transactions-filters"
 import TransactionsTable from "@/components/transactions/transactions-table"
@@ -9,6 +10,8 @@ export const Route = createFileRoute("/_authenticated/transactions")({
 })
 
 function RouteComponent() {
+  const [searchFilter, setSearchFilter] = useState("")
+
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 w-full">
       <section className="flex flex-col gap-6 items-start mb-8">
@@ -21,10 +24,13 @@ function RouteComponent() {
         </PageTitle>
 
         {/* FILTERS */}
-        <TransactionsFilters />
+        <TransactionsFilters
+          searchFilter={searchFilter}
+          onSearchChange={setSearchFilter}
+        />
 
         {/* TABLE */}
-        <TransactionsTable />
+        <TransactionsTable searchFilter={searchFilter} />
       </section>
     </main>
   )

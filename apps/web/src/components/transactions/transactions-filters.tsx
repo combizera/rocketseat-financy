@@ -19,7 +19,15 @@ interface CategoriesData {
   listCategories: Category[]
 }
 
-export default function TransactionsFilters() {
+interface TransactionsFiltersProps {
+  searchFilter: string
+  onSearchChange: (value: string) => void
+}
+
+export default function TransactionsFilters({
+  searchFilter,
+  onSearchChange
+}: TransactionsFiltersProps) {
   const { data } = useQuery<CategoriesData>(LIST_CATEGORIES)
   const categories = data?.listCategories || []
   return (
@@ -31,7 +39,8 @@ export default function TransactionsFilters() {
           type="text"
           placeholder="Buscar por Descrição"
           icon={Search}
-          required
+          value={searchFilter}
+          onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
 

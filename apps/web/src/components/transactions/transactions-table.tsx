@@ -33,7 +33,11 @@ interface TransactionsData {
   listTransactions: Transaction[]
 }
 
-export default function TransactionsTable() {
+interface TransactionsTableProps {
+  searchFilter: string
+}
+
+export default function TransactionsTable({ searchFilter }: TransactionsTableProps) {
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [deletingTransaction, setDeletingTransaction] = useState<Pick<Transaction, "id" | "description"> | null>(null)
@@ -78,13 +82,24 @@ export default function TransactionsTable() {
     )
   }
 
-  const transactions = data?.listTransactions || []
+  const allTransactions = data?.listTransactions || []
+
+  const transactions = allTransactions.filter((transaction) => {
+    if (!searchFilter) return true
+
+    const normalizedSearch = searchFilter.toLowerCase().trim()
+    const description = transaction.description?.toLowerCase() || ""
+
+    return description.includes(normalizedSearch)
+  })
 
   if (transactions.length === 0) {
     return (
       <CardCategory className="w-full rounded-md p-8">
         <p className="text-center text-gray-600">
-          Nenhuma transação encontrada
+          {searchFilter
+            ? "Nenhuma transação encontrada com os filtros aplicados"
+            : "Nenhuma transação encontrada"}
         </p>
       </CardCategory>
     )
