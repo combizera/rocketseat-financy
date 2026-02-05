@@ -29,6 +29,7 @@ interface AuthState {
   signup: (data: RegisterInput) => Promise<boolean>
   login: (data: LoginInput) => Promise<boolean>
   logout: () => void
+  updateUser: (user: User) => void
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -129,6 +130,9 @@ export const useAuthStore = create<AuthState>()(
           refreshToken: null,
           isAuthenticated: false,
         })
+      },
+      updateUser: (user: User) => {
+        set({ user })
       },
     }),
     {
