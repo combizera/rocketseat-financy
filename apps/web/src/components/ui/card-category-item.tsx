@@ -1,10 +1,17 @@
+import type { LucideIcon } from "lucide-react"
 import { SquarePen, Trash } from "lucide-react"
-import type { Category } from "@/types/category"
+import type { BadgeColor } from "./badge"
 import { Badge } from "./badge"
 import { Button } from "./button"
 import { Card } from "./card"
 
-type CardCategoryItemProps = Category & {
+type CardCategoryItemProps = {
+  id: string
+  name: string
+  description?: string
+  color: BadgeColor
+  icon: LucideIcon
+  itemsCount: number
   onEdit?: (id: string) => void
   onDelete?: (id: string) => void
 }

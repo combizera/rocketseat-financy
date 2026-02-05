@@ -8,10 +8,12 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 import Header from "@/components/header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { cn } from "@/lib/utils"
 
 import "../index.css"
+import { useAuthStore } from "@/stores/auth"
 
-export interface RouterAppContext {}
+export interface RouterAppContext { }
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
   component: RootComponent,
@@ -35,6 +37,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 })
 
 function RootComponent() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
   return (
     <>
       <HeadContent />
@@ -43,8 +46,13 @@ function RootComponent() {
         disableTransitionOnChange
         storageKey="vite-ui-theme"
       >
-        <div className="grid grid-rows-[auto_1fr] min-h-svh bg-gray-100">
-          <Header />
+        <div
+          className={cn(
+            "grid min-h-svh bg-gray-100",
+            isAuthenticated ? "grid-rows-[auto_1fr]" : "grid-rows-[1fr]",
+          )}
+        >
+          {isAuthenticated && <Header />}
           <Outlet />
         </div>
         <Toaster richColors />

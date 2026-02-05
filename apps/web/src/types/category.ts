@@ -1,12 +1,15 @@
 import type { LucideIcon } from "lucide-react"
-import type { BadgeColor } from "@/components/ui/badge"
 
 export type Category = {
   id: string
   name: string
   description?: string
-  color: BadgeColor
-  icon?: LucideIcon
-  itemsCount: number
+  color: string
+  icon: string
+  transactionsCount?: number
   totalAmount?: number
+}
+
+export type CategoryWithIconComponent = Category & {
+  iconComponent: LucideIcon
 }

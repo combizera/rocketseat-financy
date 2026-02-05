@@ -1,53 +1,109 @@
-import { HeartPulse, PenTool, PiggyBank, Ticket, Utensils } from "lucide-react";
-import CardCategoryItem from "../ui/card-category-item";
+import { useQuery } from "@apollo/client/react"
+import { useState } from "react"
+import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import { getIconComponent } from "@/lib/icon-map"
+import type { Category, CategoryWithIconComponent } from "@/types/category"
+import type { BadgeColor } from "../ui/badge"
+import CardCategoryItem from "../ui/card-category-item"
+import DeleteCategoryDialog from "./delete-category-dialog"
+import EditCategoryDialog from "./edit-category-dialog"
+
+type ListCategoriesData = {
+  listCategories: Category[]
+}
 
 export default function CategoryCards() {
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [deletingCategory, setDeletingCategory] = useState<Pick<Category, "id" | "name"> | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+
+  const { data, loading, error } = useQuery<ListCategoriesData>(LIST_CATEGORIES)
+
+  if (loading) {
+    return (
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+        <p className="text-gray-600">Carregando categorias...</p>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+        <p className="text-red-600">
+          Erro ao carregar categorias: {error.message}
+        </p>
+      </section>
+    )
+  }
+
+  const categories: CategoryWithIconComponent[] = (data?.listCategories || []).map((category) => {
+    const IconComponent = getIconComponent(category.icon)
+    return {
+      ...category,
+      iconComponent: IconComponent,
+    }
+  })
+
+  const handleEdit = (id: string) => {
+    const categoryToEdit = data?.listCategories.find((cat) => cat.id === id)
+    if (categoryToEdit) {
+      setEditingCategory(categoryToEdit)
+      setIsEditDialogOpen(true)
+    }
+  }
+
+  const handleDelete = (id: string) => {
+    const categoryToDelete = categories.find((category) => category.id === id)
+    if (categoryToDelete) {
+      setDeletingCategory({
+        id: categoryToDelete.id,
+        name: categoryToDelete.name,
+      })
+      setIsDeleteDialogOpen(true)
+    }
+  }
+
+  if (categories.length === 0) {
+    return (
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+        <p className="text-gray-600">
+          Nenhuma categoria encontrada.
+        </p>
+      </section>
+    )
+  }
+
   return (
-    <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
-      <CardCategoryItem
-        id="1"
-        name="Alimentação"
-        description="Despesas com comida e restaurantes"
-        color="green"
-        itemsCount={5}
-        icon={Utensils}
+    <>
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+        {categories.map((category) => (
+          <CardCategoryItem
+            key={category.id}
+            id={category.id}
+            name={category.name}
+            description={category.description}
+            color={category.color as BadgeColor}
+            itemsCount={category.transactionsCount || 0}
+            icon={category.iconComponent}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+        ))}
+      </section>
+
+      <EditCategoryDialog
+        category={editingCategory}
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
       />
 
-      <CardCategoryItem
-        id="2"
-        name="Utilidades"
-        description="Energia, água, internet e telefone"
-        color="yellow"
-        itemsCount={7}
-        icon={PenTool}
+      <DeleteCategoryDialog
+        category={deletingCategory}
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
       />
-
-      <CardCategoryItem
-        id="3"
-        name="Entretenimento"
-        description="Cinema, jogos e lazer"
-        color="pink"
-        itemsCount={2}
-        icon={Ticket}
-      />
-
-      <CardCategoryItem
-        id="4"
-        name="Investimento"
-        description="Aplicações financeiras e poupança"
-        color="green"
-        itemsCount={1}
-        icon={PiggyBank}
-      />
-
-      <CardCategoryItem
-        id="5"
-        name="Saúde"
-        description="Despesas com saúde e bem-estar"
-        color="red"
-        itemsCount={5}
-        icon={HeartPulse}
-      />
-    </section>
+    </>
   )
 }

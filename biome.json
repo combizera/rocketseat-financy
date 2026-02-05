@@ -10,6 +10,9 @@
     "includes": ["**", "!cypress/**/*", "!**/*.cy.{ts,tsx}"]
   },
   "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
     "formatter": {
       "enabled": true,
       "quoteStyle": "double",

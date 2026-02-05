@@ -4,7 +4,7 @@ import CategoryWidgets from "@/components/categories/category-widgets"
 import CreateCategoryButton from "@/components/categories/create-category-button"
 import PageTitle from "@/components/ui/page-title"
 
-export const Route = createFileRoute("/categories")({
+export const Route = createFileRoute("/_authenticated/categories")({
   component: RouteComponent,
 })
 

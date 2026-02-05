@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
 
 import { Lock, LogIn, Mail, UserRound } from "lucide-react"
+import { useState } from "react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -13,37 +15,69 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { useAuthStore } from "@/stores/auth"
 
-export const Route = createFileRoute("/register")({
+export const Route = createFileRoute("/_guest/register")({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const signup = useAuthStore((state) => state.signup)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    try {
+      const signupMutate = await signup({
+        name,
+        email,
+        password,
+      })
+
+      if (signupMutate) {
+        toast.success("Conta criada com sucesso!")
+        navigate({ to: "/dashboard" })
+      }
+    } catch (error: unknown) {
+      toast.error("Erro ao realizar o cadastro")
+      console.error("Signup error:", error)
+      if (error && typeof error === "object" && "message" in error) {
+        console.error((error as { message: string }).message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="flex flex-col gap-10 justify-center items-center">
-
-      <img
-        alt="Logo"
-        className="w-33.5"
-        src="/images/logo.svg"
-      />
+      <img alt="Logo" className="w-33.5" src="/images/logo.svg" />
 
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="fon">Criar conta</CardTitle>
+          <CardTitle>Criar conta</CardTitle>
           <CardDescription>
             Comece a controlar suas finanças ainda hoje
           </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Nome Completo</Label>
+                <Label htmlFor="name">Nome Completo</Label>
                 <Input
                   id="name"
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Seu nome completo"
                   icon={UserRound}
                   required
@@ -54,6 +88,8 @@ function RouteComponent() {
                 <Input
                   id="email"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="m@example.com"
                   icon={Mail}
                   required
@@ -67,6 +103,8 @@ function RouteComponent() {
                 <Input
                   id="password"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="********"
                   icon={Lock}
                   required
@@ -76,7 +114,7 @@ function RouteComponent() {
                 </CardDescription>
               </div>
             </div>
-            <Button type="submit" className="w-full mt-4 text-base">
+            <Button disabled={loading} type="submit" className="w-full mt-4 text-base">
               Cadastrar
             </Button>
           </form>
@@ -89,9 +127,7 @@ function RouteComponent() {
             <Separator className="flex-1" />
           </div>
 
-          <CardDescription>
-            Já tem uma conta?
-          </CardDescription>
+          <CardDescription>Já tem uma conta?</CardDescription>
 
           <Button variant="secondary" className="w-full" asChild>
             <Link to="/">
