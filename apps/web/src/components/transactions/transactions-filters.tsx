@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { LIST_CATEGORIES } from "@/lib/graphql/querys/Category"
+import type { TransactionFilters } from "@/routes/_authenticated/transactions"
 import type { Category } from "@/types/category"
 
 interface CategoriesData {
@@ -20,16 +21,17 @@ interface CategoriesData {
 }
 
 interface TransactionsFiltersProps {
-  searchFilter: string
-  onSearchChange: (value: string) => void
+  filters: TransactionFilters
+  onFilterChange: (key: keyof TransactionFilters, value: string) => void
 }
 
 export default function TransactionsFilters({
-  searchFilter,
-  onSearchChange
+  filters,
+  onFilterChange
 }: TransactionsFiltersProps) {
   const { data } = useQuery<CategoriesData>(LIST_CATEGORIES)
   const categories = data?.listCategories || []
+
   return (
     <Card className="w-full grid grid-cols-4 gap-4 p-6">
       <div className="flex flex-col gap-2">
@@ -39,22 +41,27 @@ export default function TransactionsFilters({
           type="text"
           placeholder="Buscar por Descrição"
           icon={Search}
-          value={searchFilter}
-          onChange={(e) => onSearchChange(e.target.value)}
+          value={filters.search}
+          onChange={(e) => onFilterChange("search", e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Tipo</Label>
-        <Select>
+        <Select
+          key={`type-${filters.type}`}
+          value={filters.type || "all"}
+          onValueChange={(value) => onFilterChange("type", value || "all")}
+        >
           <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione o tipo" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tipo</SelectLabel>
-              <SelectItem value="income">Income</SelectItem>
-              <SelectItem value="expense">Expense</SelectItem>
+              <SelectItem value="all">Todos</SelectItem>
+              <SelectItem value="INCOME">Entrada</SelectItem>
+              <SelectItem value="EXPENSE">Saída</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -62,15 +69,20 @@ export default function TransactionsFilters({
 
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Categoria</Label>
-        <Select>
+        <Select
+          key={`category-${filters.category}`}
+          value={filters.category || "all"}
+          onValueChange={(value) => onFilterChange("category", value || "all")}
+        >
           <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione a Categoria" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Categoria</SelectLabel>
+              <SelectItem value="all">Todas</SelectItem>
               {categories.map((category) => (
-                <SelectItem key={category.id} value={category.name}>
+                <SelectItem key={category.id} value={category.id}>
                   {category.name}
                 </SelectItem>
               ))}
@@ -81,25 +93,30 @@ export default function TransactionsFilters({
 
       <div className="flex flex-col gap-2">
         <Label className="text-gray-500">Período</Label>
-        <Select>
+        <Select
+          key={`period-${filters.period}`}
+          value={filters.period || "all"}
+          onValueChange={(value) => onFilterChange("period", value || "all")}
+        >
           <SelectTrigger className="w-full h-11.5!">
             <SelectValue placeholder="Selecione o período" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Mês</SelectLabel>
-              <SelectItem value="jan">Janeiro</SelectItem>
-              <SelectItem value="fev">Fevereiro</SelectItem>
-              <SelectItem value="mar">Março</SelectItem>
-              <SelectItem value="abr">Abril</SelectItem>
-              <SelectItem value="mai">Maio</SelectItem>
-              <SelectItem value="jun">Junho</SelectItem>
-              <SelectItem value="jul">Julho</SelectItem>
-              <SelectItem value="ago">Agosto</SelectItem>
-              <SelectItem value="set">Setembro</SelectItem>
-              <SelectItem value="out">Outubro</SelectItem>
-              <SelectItem value="nov">Novembro</SelectItem>
-              <SelectItem value="dez">Dezembro</SelectItem>
+              <SelectItem value="all">Todos</SelectItem>
+              <SelectItem value="0">Janeiro</SelectItem>
+              <SelectItem value="1">Fevereiro</SelectItem>
+              <SelectItem value="2">Março</SelectItem>
+              <SelectItem value="3">Abril</SelectItem>
+              <SelectItem value="4">Maio</SelectItem>
+              <SelectItem value="5">Junho</SelectItem>
+              <SelectItem value="6">Julho</SelectItem>
+              <SelectItem value="7">Agosto</SelectItem>
+              <SelectItem value="8">Setembro</SelectItem>
+              <SelectItem value="9">Outubro</SelectItem>
+              <SelectItem value="10">Novembro</SelectItem>
+              <SelectItem value="11">Dezembro</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

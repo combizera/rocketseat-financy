@@ -24,6 +24,7 @@ import {
 import { LIST_TRANSACTION } from "@/lib/graphql/querys/Transaction"
 import { getIconComponent } from "@/lib/icon-map"
 import { formatCurrency } from "@/lib/utils"
+import type { TransactionFilters } from "@/routes/_authenticated/transactions"
 import type { BadgeColor } from "@/types/badge"
 import type { Transaction } from "@/types/transaction"
 import DeleteTransactionDialog from "./delete-transaction-dialog"
@@ -34,10 +35,10 @@ interface TransactionsData {
 }
 
 interface TransactionsTableProps {
-  searchFilter: string
+  filters: TransactionFilters
 }
 
-export default function TransactionsTable({ searchFilter }: TransactionsTableProps) {
+export default function TransactionsTable({ filters }: TransactionsTableProps) {
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [deletingTransaction, setDeletingTransaction] = useState<Pick<Transaction, "id" | "description"> | null>(null)
@@ -85,19 +86,35 @@ export default function TransactionsTable({ searchFilter }: TransactionsTablePro
   const allTransactions = data?.listTransactions || []
 
   const transactions = allTransactions.filter((transaction) => {
-    if (!searchFilter) return true
+    if (filters.search) {
+      const normalizedSearch = filters.search.toLowerCase().trim()
+      const description = transaction.description?.toLowerCase() || ""
+      if (!description.includes(normalizedSearch)) return false
+    }
 
-    const normalizedSearch = searchFilter.toLowerCase().trim()
-    const description = transaction.description?.toLowerCase() || ""
+    if (filters.type && filters.type !== "all") {
+      if (transaction.type !== filters.type) return false
+    }
 
-    return description.includes(normalizedSearch)
+    if (filters.category && filters.category !== "all") {
+      if (transaction.category.id !== filters.category) return false
+    }
+
+    if (filters.period && filters.period !== "all") {
+      const transactionMonth = new Date(transaction.date).getMonth()
+      if (transactionMonth !== Number.parseInt(filters.period)) return false
+    }
+
+    return true
   })
+
+  const hasActiveFilters = filters.search || filters.type || filters.category || filters.period
 
   if (transactions.length === 0) {
     return (
       <CardCategory className="w-full rounded-md p-8">
         <p className="text-center text-gray-600">
-          {searchFilter
+          {hasActiveFilters
             ? "Nenhuma transação encontrada com os filtros aplicados"
             : "Nenhuma transação encontrada"}
         </p>

@@ -9,8 +9,24 @@ export const Route = createFileRoute("/_authenticated/transactions")({
   component: RouteComponent,
 })
 
+export interface TransactionFilters {
+  search: string
+  type: string
+  category: string
+  period: string
+}
+
 function RouteComponent() {
-  const [searchFilter, setSearchFilter] = useState("")
+  const [filters, setFilters] = useState<TransactionFilters>({
+    search: "",
+    type: "all",
+    category: "all",
+    period: "all",
+  })
+
+  const handleFilterChange = (key: keyof TransactionFilters, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: value }))
+  }
 
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 w-full">
@@ -25,12 +41,12 @@ function RouteComponent() {
 
         {/* FILTERS */}
         <TransactionsFilters
-          searchFilter={searchFilter}
-          onSearchChange={setSearchFilter}
+          filters={filters}
+          onFilterChange={handleFilterChange}
         />
 
         {/* TABLE */}
-        <TransactionsTable searchFilter={searchFilter} />
+        <TransactionsTable filters={filters} />
       </section>
     </main>
   )
