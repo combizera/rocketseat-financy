@@ -64,7 +64,7 @@ cp apps/web/.env.example apps/web/.env
 
 **Backend** (`apps/server/.env`)
 ```env
-DATABASE_URL="file:./local.db"
+DATABASE_URL="file:../../packages/db/local.db"
 JWT_SECRET="seu_secret_jwt_aqui"  # ⚠️ Troque por uma string aleatória!
 ```
 
@@ -78,8 +78,8 @@ VITE_GQL_SERVER_URL=http://localhost:3005
 # Gera o Prisma Client
 bun run db:generate
 
-# Aplica as migrations
-bun run db:push
+# Aplica as migrations e cria as tabelas
+bun run db:migrate
 ```
 
 ### 5. Inicie o projeto
@@ -112,7 +112,8 @@ bun run build            # Build de todos os projetos
 bun run format           # Formata o código com Biome
 bun run check-types      # Verifica tipos TypeScript
 bun run db:studio        # Abre o Prisma Studio
-bun run db:migrate       # Cria uma nova migration
+bun run db:migrate       # Aplica as migrations do banco de dados
+bun run db:push          # Sincroniza o schema sem criar migrations
 ```
 
 ## Funcionalidades
@@ -164,7 +165,7 @@ Verifique se:
 - Não há firewall bloqueando a porta
 
 ### Banco de dados vazio
-Execute `bun run db:push` para criar as tabelas no banco de dados.
+Execute `bun run db:migrate` para aplicar as migrations e criar as tabelas no banco de dados.
 
 ### Erro de autenticação
 Verifique se a variável `JWT_SECRET` está definida no `.env` do backend.
